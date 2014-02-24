@@ -136,9 +136,11 @@ Robot =
 ## Bracket robot connections.
 ##
 
-Robot.connectRobot(x) for x in robots
-Robot.setColorRGB(robots[0], 255, 0, 0)
-Robot.setColorRGB(robots[1], 0, 0, 255)
+$(->
+    Robot.connectRobot(x) for x in robots
+    Robot.setColorRGB(robots[0], 255, 0, 0)
+    Robot.setColorRGB(robots[1], 0, 0, 255)
+)
 
 window.onbeforeunload = ->
     Robot.setColorRGB(robots[0], 0, 255, 0)
