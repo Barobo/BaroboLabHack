@@ -22,7 +22,7 @@ angular.module('explore', []).controller('Explore', function($scope) {
     $scope.a2 = -$scope.x2 / $scope.y2;
     return $scope.b2 = $scope.z2 / $scope.y2;
   }, true);
-  return $scope.changeSelected = function(robot, left) {
+  $scope.changeSelected = function(robot, left) {
     return $scope.$apply(function() {
       if (left) {
         if ($scope.selected[robot] > 0) {
@@ -32,6 +32,19 @@ angular.module('explore', []).controller('Explore', function($scope) {
         if ($scope.selected[robot] < 2) {
           return $scope.selected[robot] += 1;
         }
+      }
+    });
+  };
+  return $scope.incrementSelected = function(robot, up) {
+    return $scope.$apply(function() {
+      var coefficient, idx, sel;
+      sel = $scope.selected[robot];
+      idx = robot + 1;
+      coefficient = (sel === 0 ? "x" : sel === 1 ? "y" : "z") + idx;
+      if (up) {
+        return $scope[coefficient] += 1;
+      } else {
+        return $scope[coefficient] -= 1;
       }
     });
   };
@@ -176,6 +189,14 @@ Robot.buttonChanged.connect(function(id, btn) {
   return activeTab.scope().changeSelected(robots.indexOf(id), btn === 0);
 });
 
-Robot.scrollDown.connect(function(id) {});
+Robot.scrollDown.connect(function(id) {
+  var activeTab;
+  activeTab = $(".tab-pane.active");
+  return activeTab.scope().incrementSelected(robots.indexOf(id), false);
+});
 
-Robot.scrollUp.connect(function(id) {});
+Robot.scrollUp.connect(function(id) {
+  var activeTab;
+  activeTab = $(".tab-pane.active");
+  return activeTab.scope().incrementSelected(robots.indexOf(id), true);
+});

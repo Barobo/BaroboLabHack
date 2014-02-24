@@ -38,6 +38,25 @@ angular.module('explore', [])
                     if $scope.selected[robot] < 2
                         $scope.selected[robot] += 1
             )
+        $scope.incrementSelected = (robot, up) ->
+            $scope.$apply(->
+                sel = $scope.selected[robot]
+                # Blerg
+                idx = robot + 1
+                coefficient = (
+                    if sel == 0
+                        "x"
+                    else if sel == 1
+                        "y"
+                    else
+                        "z"
+                ) + idx
+
+                if up
+                    $scope[coefficient] += 1
+                else
+                    $scope[coefficient] -= 1
+            )
     )
     .controller('InterceptEqns', ($scope) ->
         $scope.a1 = 0.5
@@ -168,6 +187,16 @@ Robot.buttonChanged.connect((id, btn) ->
     )
 )
 Robot.scrollDown.connect((id) ->
+    activeTab = $(".tab-pane.active")
+    activeTab.scope().incrementSelected(
+        robots.indexOf(id)
+        false
+    )
 )
 Robot.scrollUp.connect((id) ->
+    activeTab = $(".tab-pane.active")
+    activeTab.scope().incrementSelected(
+        robots.indexOf(id)
+        true
+    )
 )
