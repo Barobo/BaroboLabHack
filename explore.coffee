@@ -44,6 +44,17 @@ angular.module('explore', [])
         $scope.b1 = 4
         $scope.a2 = 2
         $scope.b2 = -2
+
+        $scope.selected = [0,0]
+        $scope.changeSelected = (robot, left) ->
+            $scope.$apply(->
+                if left
+                    if $scope.selected[robot] > 0
+                        $scope.selected[robot] -= 1
+                else
+                    if $scope.selected[robot] < 1
+                        $scope.selected[robot] += 1
+            )
     )
     .controller('Graph', ($scope, $element) ->
         chartCfg = {

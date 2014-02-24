@@ -366,21 +366,29 @@ explore = boilerplate
             H.div $ str $ "y-intercept = " ++ num "z2/y2"
     interceptEquations = do
         H.div !. "eqn-control" !# "leftEqn" $ do
-            H.div $ do
+            H.div ! ngHide "!mockRobot" $ do
                 "y = "
                 numInput "a1"
                 "x + "
                 numInput "b1"
-            H.div $ str $ "y = " ++ num "a1" ++ "x + " ++ num "b1"
+            H.div $ do
+                "y = "
+                control0 "0" "a1"
+                "x + "
+                control0 "1" "b1"
             H.div $ str $ "Slope = " ++ num "a1"
             H.div $ str $ "y-intercept = " ++ num "b1"
         H.div !. "eqn-control" !# "rightEqn" $ do
-            H.div $ do
+            H.div ! ngHide "!mockRobot" $ do
                 "y = "
                 numInput "a2"
                 "x + "
                 numInput "b2"
-            H.div $ str $ "y = " ++ num "a2" ++ "x + " ++ num "b2"
+            H.div $ do
+                "y = "
+                control1 "0" "a2"
+                "x + "
+                control1 "1" "b2"
             H.div $ str $ "Slope = " ++ num "a2"
             H.div $ str $ "y-intercept = " ++ num "b2"
     numInput m = input ! type_ "number" ! maxlength "3" ! size "3"

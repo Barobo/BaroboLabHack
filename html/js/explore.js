@@ -39,7 +39,21 @@ angular.module('explore', []).controller('Explore', function($scope) {
   $scope.a1 = 0.5;
   $scope.b1 = 4;
   $scope.a2 = 2;
-  return $scope.b2 = -2;
+  $scope.b2 = -2;
+  $scope.selected = [0, 0];
+  return $scope.changeSelected = function(robot, left) {
+    return $scope.$apply(function() {
+      if (left) {
+        if ($scope.selected[robot] > 0) {
+          return $scope.selected[robot] -= 1;
+        }
+      } else {
+        if ($scope.selected[robot] < 1) {
+          return $scope.selected[robot] += 1;
+        }
+      }
+    });
+  };
 }).controller('Graph', function($scope, $element) {
   var chartCfg;
   chartCfg = {
