@@ -135,38 +135,28 @@ Robot = (function() {
   }
 })();
 
-for (_i = 0, _len = robots.length; _i < _len; _i++) {
-  x = robots[_i];
-  Robot.connectRobot(x);
-}
-
-Robot.setColorRGB(robots[0], 255, 0, 0);
-
-Robot.setColorRGB(robots[1], 0, 0, 255);
+$(function() {
+  var _i, _len;
+  for (_i = 0, _len = robots.length; _i < _len; _i++) {
+    x = robots[_i];
+    Robot.connectRobot(x);
+  }
+  Robot.setColorRGB(robots[0], 255, 0, 0);
+  return Robot.setColorRGB(robots[1], 0, 0, 255);
+});
 
 window.onbeforeunload = function() {
-  var _j, _len1;
+  var _i, _len;
   Robot.setColorRGB(robots[0], 0, 255, 0);
   Robot.setColorRGB(robots[1], 0, 255, 0);
-  for (_j = 0, _len1 = robots.length; _j < _len1; _j++) {
-    x = robots[_j];
+  for (_i = 0, _len = robots.length; _i < _len; _i++) {
+    x = robots[_i];
     Robot.disconnectRobot(x);
   }
   return null;
 };
 
 Robot.buttonChanged.connect(function(id, btn) {
-
-  /*
-  if it's the right robot, change the input field of the left eqn on the
-  active pane.
-  
-  What is the active pane? Well we can get that with
-  
-  activeTab = $("tab-pane active").scope().
-  
-  Then we want the
-   */
   var activeTab;
   activeTab = $(".tab-pane.active");
   return activeTab.scope().changeSelected(robots.indexOf(id), btn === 0);

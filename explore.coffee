@@ -149,17 +149,6 @@ window.onbeforeunload = ->
     null
 
 Robot.buttonChanged.connect((id, btn) ->
-    ###
-    if it's the right robot, change the input field of the left eqn on the
-    active pane.
-
-    What is the active pane? Well we can get that with
-
-    activeTab = $("tab-pane active").scope().
-
-    Then we want the 
-
-    ###
     activeTab = $(".tab-pane.active")
 
     activeTab.scope().changeSelected(
