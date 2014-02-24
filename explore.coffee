@@ -30,14 +30,14 @@ angular.module('explore', [])
         )
 
         $scope.changeSelected = (robot, left) ->
-            if left
-                if $scope.selected[robot] > 0
-                    $scope.selected[robot] -= 1
-
-            else
-                if $scope.selected[robot] < 2
-                    $scope.selected[robot] += 1
-
+            $scope.$apply(->
+                if left
+                    if $scope.selected[robot] > 0
+                        $scope.selected[robot] -= 1
+                else
+                    if $scope.selected[robot] < 2
+                        $scope.selected[robot] += 1
+            )
     )
     .controller('InterceptEqns', ($scope) ->
         $scope.a1 = 0.5
