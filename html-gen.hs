@@ -292,6 +292,9 @@ calculateChart = boilerplate
   where
     tdm m = td $ str $ "$" ++ m ++ "$"
 
+tabLink link title =
+  a ! href (val $ '#' : link) ! dataAttribute "toggle" "tab" $ title
+
 explore = boilerplate
     (labNav "Explore")
     (section ! ngApp "explore" ! ngController "Explore" $ do
@@ -327,8 +330,6 @@ explore = boilerplate
     , "css/explore.css"
     ]
   where
-    tabLink link title =
-      a ! href (val $ '#' : link) ! dataAttribute "toggle" "tab" $ title
     standardEquations = do
         H.div !. "eqn-control" !# "leftEqn" $ do
             H.div ! ngHide "!mockRobot" $ do
@@ -405,6 +406,41 @@ explore = boilerplate
                 $ "{activeControl: selected["
                     ++ rob ++ "] == " ++ n ++ "}"
 
+
+challenge = boilerplate
+    (labNav "Challenge")
+    (section ! ngApp "challenge" ! ngController "Challenge" $ do
+        ul !. "nav nav-tabs" $ do
+            li !. "active" $
+                tabLink "standardForm" "Standard Form"
+            li $
+                tabLink "slopeInterceptForm" "Slope Intercept Form"
+        H.div !. "tab-content" $ do
+            H.div !# "standardForm" !. "tab-pane active"
+                  ! ngController "StandardEqns" $ do
+                H.div $ do
+                    standardEquations
+                H.div !# "chartDisplay" ! ngController "Graph" $ do
+                    H.div !. "chartGoesHere" $ mempty
+            H.div !# "slopeInterceptForm" !. "tab-pane"
+                  ! ngController "InterceptEqns" $ do
+                H.div $ do
+                    interceptEquations
+                H.div !# "chartDisplay" ! ngController "Graph" $ do
+                    H.div !. "chartGoesHere" $ mempty
+        a ! href "challenge.html"
+          !. "next btn btn-large btn-primary" $ "Next"
+    )
+    [ "js/vendor/angular.min.js"
+    , "js/vendor/jqmath-etc-0.4.0.min.js"
+    , "js/flot/jquery.flot.js"
+    , "js/challenge_.js"
+    ]
+    []
+  where
+    standardEquations = mempty
+    interceptEquations = mempty
+
 main = mapM_ genHtml [
     ("html/index.html", index)
     , ("html/holt.html", holt)
@@ -417,6 +453,7 @@ main = mapM_ genHtml [
     , ("html/calculate_setup.html", calculateSetup)
     , ("html/calculate_chart.html", calculateChart)
     , ("html/explore.html", explore)
+    , ("html/challenge.html", challenge)
     ]
 
 -- This belongs to a different lab.
