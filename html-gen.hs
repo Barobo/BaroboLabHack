@@ -315,7 +315,7 @@ activeControlClass rob n =
                 ++ rob ++ "] == " ++ n ++ "}"
 num expr = "{{" ++ expr ++ "| number | plusMinus}}"
 num' expr = "{{" ++ expr ++ "| number | plusMinus:true}}"
-successIf eqn = do
+checkboxIf eqn = do
     H.div ! ngShow eqn $ "☑"
     H.div ! ngHide eqn $ "☐"
 
@@ -476,7 +476,7 @@ challenge = boilerplate
                 H.div $ str $ concat
                     [ (num' $ x ++ " * solnX + " ++ y ++ " * solnY")
                     , " = " , num' z ]
-                successIf eqn
+                checkboxIf eqn
           where
             eqn = val $ x ++ " * solnX + " ++ y ++ " * solnY == " ++ z
     interceptEquations = do
@@ -502,7 +502,7 @@ challenge = boilerplate
                     , num b ]
                 H.div $ str $
                     num' "solnY" ++ " = " ++ (num' $ a ++ " * solnX + " ++ b)
-                successIf $ val $ "solnY == " ++ a ++ " * solnX + " ++ b
+                checkboxIf $ val $ "solnY == " ++ a ++ " * solnX + " ++ b
 
 main = mapM_ genHtml [
     ("html/index.html", index)
