@@ -55,18 +55,95 @@
             <ul class="nav nav-tabs">
                 <li class="active">
                     <a href="#standardForm" data-toggle="tab">
-                        Standard Form
+                        Standard Form Challenge
                     </a>
                 </li>
                 <li>
                     <a href="#slopeInterceptForm" data-toggle="tab">
-                        Slope Intercept Form
+                        Slope Intercept Challenge
                     </a>
                 </li>
             </ul>
             <div class="tab-content">
                 <div id="standardForm" class="tab-pane active" ng-controller="StandardEqns">
                     <div>
+                        <div>
+                            Is ({{solnX| number }}, {{solnY| number }}) a solution?
+                        </div>
+                        <div class="eqn-control" id="leftEqn">
+                            <div ng-hide="!mockRobot">
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="x1">
+                                x + 
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="y1">
+                                y = 
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="z1">
+                            </div>
+                            <div>
+                                <span ng-class="{activeControl: selected[0] == 0}">
+                                    {{x1| number }}
+                                </span>
+                                x + 
+                                <span ng-class="{activeControl: selected[0] == 1}">
+                                    {{y1| number }}
+                                </span>
+                                y = 
+                                <span ng-class="{activeControl: selected[0] == 2}">
+                                    {{z1| number }}
+                                </span>
+                            </div>
+                            <div>
+                                check:{{x1| number }}({{solnX| number }}) + {{y1| number }}({{solnY| number }}) = {{z1| number }}
+                            </div>
+                            <div>
+                                {{x1 * solnX| number }} + {{y1 * solnY| number }} = {{z1| number }}
+                            </div>
+                            <div>
+                                {{x1 * solnX + y1 * solnY| number }} = {{z1| number }}
+                            </div>
+                            <div ng-show="x1 * solnX + y1 * solnY == z1">
+                                ☑
+                            </div>
+                            <div ng-hide="x1 * solnX + y1 * solnY == z1">
+                                ☐
+                            </div>
+                        </div>
+                        <div class="eqn-control" id="leftEqn">
+                            <div ng-hide="!mockRobot">
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="x2">
+                                x + 
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="y2">
+                                y = 
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="z2">
+                            </div>
+                            <div>
+                                <span ng-class="{activeControl: selected[0] == 0}">
+                                    {{x2| number }}
+                                </span>
+                                x + 
+                                <span ng-class="{activeControl: selected[0] == 1}">
+                                    {{y2| number }}
+                                </span>
+                                y = 
+                                <span ng-class="{activeControl: selected[0] == 2}">
+                                    {{z2| number }}
+                                </span>
+                            </div>
+                            <div>
+                                check:{{x2| number }}({{solnX| number }}) + {{y2| number }}({{solnY| number }}) = {{z2| number }}
+                            </div>
+                            <div>
+                                {{x2 * solnX| number }} + {{y2 * solnY| number }} = {{z2| number }}
+                            </div>
+                            <div>
+                                {{x2 * solnX + y2 * solnY| number }} = {{z2| number }}
+                            </div>
+                            <div ng-show="x1 * solnX + y1 * solnY == z1">
+                                ☑
+                            </div>
+                            <div ng-hide="x1 * solnX + y1 * solnY == z1">
+                                ☐
+                            </div>
+                        </div>
                     </div>
                     <div id="chartDisplay" ng-controller="Graph">
                         <div class="chartGoesHere">
@@ -75,6 +152,69 @@
                 </div>
                 <div id="slopeInterceptForm" class="tab-pane" ng-controller="InterceptEqns">
                     <div>
+                        <div>
+                            Is ({{solnX| number }}, {{solnY| number }}) a solution?
+                        </div>
+                        <div class="eqn-control" id="leftEqn">
+                            <div ng-hide="!mockRobot">
+                                y = 
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="a1">
+                                x + 
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="b1">
+                            </div>
+                            <div>
+                                y = 
+                                <span ng-class="{activeControl: selected[0] == 0}">
+                                    {{a1| number }}
+                                </span>
+                                x + 
+                                <span ng-class="{activeControl: selected[0] == 1}">
+                                    {{b1| number }}
+                                </span>
+                            </div>
+                            <div>
+                                {{solnY| number }} = {{a1| number }}({{solnX| number }}) + {{b1| number }}
+                            </div>
+                            <div>
+                                {{solnY| number }} = {{a1 * solnX + b1| number }}
+                            </div>
+                            <div ng-show="solnY == a1 * solnX + b1">
+                                ☑
+                            </div>
+                            <div ng-hide="solnY == a1 * solnX + b1">
+                                ☐
+                            </div>
+                        </div>
+                        <div class="eqn-control" id="rightEqn">
+                            <div ng-hide="!mockRobot">
+                                y = 
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="a2">
+                                x + 
+                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="b2">
+                            </div>
+                            <div>
+                                y = 
+                                <span ng-class="{activeControl: selected[0] == 0}">
+                                    {{a2| number }}
+                                </span>
+                                x + 
+                                <span ng-class="{activeControl: selected[0] == 1}">
+                                    {{b2| number }}
+                                </span>
+                            </div>
+                            <div>
+                                {{solnY| number }} = {{a2| number }}({{solnX| number }}) + {{b2| number }}
+                            </div>
+                            <div>
+                                {{solnY| number }} = {{a2 * solnX + b2| number }}
+                            </div>
+                            <div ng-show="solnY == a2 * solnX + b2">
+                                ☑
+                            </div>
+                            <div ng-hide="solnY == a2 * solnX + b2">
+                                ☐
+                            </div>
+                        </div>
                     </div>
                     <div id="chartDisplay" ng-controller="Graph">
                         <div class="chartGoesHere">

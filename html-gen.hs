@@ -23,6 +23,7 @@ ngHide = customAttribute "ng-hide"
 ngController = customAttribute "ng-controller"
 ngApp = customAttribute "ng-app"
 ngClass = customAttribute "ng-class"
+ngShow = customAttribute "ng-show"
 
 
 boilerplate navlist content scripts styles =
@@ -292,8 +293,25 @@ calculateChart = boilerplate
   where
     tdm m = td $ str $ "$" ++ m ++ "$"
 
+--
+-- Shared between explore and challenge:
+--
+
 tabLink link title =
   a ! href (val $ '#' : link) ! dataAttribute "toggle" "tab" $ title
+numInput m = input ! type_ "number" ! maxlength "3" ! size "3"
+                 ! A.max "99" ! A.min "-99" ! ngModel m
+control0 = control "0"
+control1 = control "1"
+control rob n v =
+    H.span
+        ! activeControlClass rob n
+        $ str $ num v
+activeControlClass rob n =
+    ngClass $ val
+            $ "{activeControl: selected["
+                ++ rob ++ "] == " ++ n ++ "}"
+num expr = "{{" ++ expr ++ "| number }}"
 
 explore = boilerplate
     (labNav "Explore")
@@ -392,19 +410,6 @@ explore = boilerplate
                 control1 "1" "b2"
             H.div $ str $ "Slope = " ++ num "a2"
             H.div $ str $ "y-intercept = " ++ num "b2"
-    numInput m = input ! type_ "number" ! maxlength "3" ! size "3"
-                       ! A.max "99" ! A.min "-99" ! ngModel m
-    num expr = "{{" ++ expr ++ "| number }}"
-    control0 = control "0"
-    control1 = control "1"
-    control rob n v =
-        H.span
-            ! activeControlClass rob n
-            $ str $ num v
-    activeControlClass rob n =
-        ngClass $ val
-                $ "{activeControl: selected["
-                    ++ rob ++ "] == " ++ n ++ "}"
 
 
 challenge = boilerplate
@@ -412,9 +417,9 @@ challenge = boilerplate
     (section ! ngApp "challenge" ! ngController "Challenge" $ do
         ul !. "nav nav-tabs" $ do
             li !. "active" $
-                tabLink "standardForm" "Standard Form"
+                tabLink "standardForm" "Standard Form Challenge"
             li $
-                tabLink "slopeInterceptForm" "Slope Intercept Form"
+                tabLink "slopeInterceptForm" "Slope Intercept Challenge"
         H.div !. "tab-content" $ do
             H.div !# "standardForm" !. "tab-pane active"
                   ! ngController "StandardEqns" $ do
@@ -438,8 +443,93 @@ challenge = boilerplate
     ]
     []
   where
-    standardEquations = mempty
-    interceptEquations = mempty
+    standardEquations = do
+        H.div $ str $ concat
+            [ "Is (" , num "solnX" , ", " , num "solnY" , ") a solution?" ]
+        H.div !. "eqn-control" !# "leftEqn" $ do
+            H.div ! ngHide "!mockRobot" $ do
+                numInput "x1"
+                "x + "
+                numInput "y1"
+                "y = "
+                numInput "z1"
+            H.div $ do
+                control0 "0" "x1"
+                "x + "
+                control0 "1" "y1"
+                "y = "
+                control0 "2" "z1"
+            H.div $ str $ concat
+                [ "check:" , num "x1" , "(" , num "solnX" , ") + " , num "y1"
+                , "(" , num "solnY" , ") = " , num "z1" ]
+            H.div $ str $ concat
+                [ num "x1 * solnX" , " + " , num "y1 * solnY" , " = "
+                , num "z1" ]
+            H.div $ str $ concat
+                [ num "x1 * solnX + y1 * solnY" , " = " , num "z1" ]
+            H.div ! ngShow eqn $ "☑"
+            H.div ! ngHide eqn $ "☐"
+        H.div !. "eqn-control" !# "leftEqn" $ do
+            H.div ! ngHide "!mockRobot" $ do
+                numInput "x2"
+                "x + "
+                numInput "y2"
+                "y = "
+                numInput "z2"
+            H.div $ do
+                control0 "0" "x2"
+                "x + "
+                control0 "1" "y2"
+                "y = "
+                control0 "2" "z2"
+            H.div $ str $ concat
+                [ "check:" , num "x2" , "(" , num "solnX" , ") + " , num "y2"
+                , "(" , num "solnY" , ") = " , num "z2" ]
+            H.div $ str $ concat
+                [ num "x2 * solnX" , " + " , num "y2 * solnY" , " = "
+                , num "z2" ]
+            H.div $ str $ concat
+                [ num "x2 * solnX + y2 * solnY" , " = " , num "z2" ]
+            H.div ! ngShow eqn $ "☑"
+            H.div ! ngHide eqn $ "☐"
+    eqn = "x1 * solnX + y1 * solnY == z1"
+    interceptEquations = do
+        H.div $ str $ concat
+            [ "Is (" , num "solnX" , ", " , num "solnY" , ") a solution?" ]
+        H.div !. "eqn-control" !# "leftEqn" $ do
+            H.div ! ngHide "!mockRobot" $ do
+                "y = "
+                numInput "a1"
+                "x + "
+                numInput "b1"
+            H.div $ do
+                "y = "
+                control0 "0" "a1"
+                "x + "
+                control0 "1" "b1"
+            H.div $ str $ concat
+                [ num "solnY", " = ", num "a1", "(", num "solnX", ") + "
+                , num "b1" ]
+            H.div $ str $ num "solnY" ++ " = " ++ num "a1 * solnX + b1"
+            H.div ! ngShow "solnY == a1 * solnX + b1" $ "☑"
+            H.div ! ngHide "solnY == a1 * solnX + b1" $ "☐"
+        H.div !. "eqn-control" !# "rightEqn" $ do
+            H.div ! ngHide "!mockRobot" $ do
+                "y = "
+                numInput "a2"
+                "x + "
+                numInput "b2"
+            H.div $ do
+                "y = "
+                control0 "0" "a2"
+                "x + "
+                control0 "1" "b2"
+            H.div $ str $ concat
+                [ num "solnY", " = ", num "a2", "(", num "solnX", ") + "
+                , num "b2" ]
+            H.div $ str $ num "solnY" ++ " = " ++ num "a2 * solnX + b2"
+            H.div ! ngShow "solnY == a2 * solnX + b2" $ "☑"
+            H.div ! ngHide "solnY == a2 * solnX + b2" $ "☐"
 
 main = mapM_ genHtml [
     ("html/index.html", index)
@@ -455,14 +545,3 @@ main = mapM_ genHtml [
     , ("html/explore.html", explore)
     , ("html/challenge.html", challenge)
     ]
-
--- This belongs to a different lab.
-{-
-challenge = boilerplate
-    (labNav "Challenge")
-    (do
-      h2 $ "Factoring Challenge"
-      H.div ! A.id "challengeApp" $ mempty
-    )
-    ["js/vendor/serenade.0.5.0.js", "js/challenge/sr-view-app.js", "js/challenge.js"]
--}
