@@ -420,14 +420,13 @@ challenge = boilerplate
                   ! ngController "StandardEqns" $ do
                 H.div $ do
                     standardEquations
-                H.div !# "chartDisplay" ! ngController "Graph" $ do
-                    H.div !. "chartGoesHere" $ mempty
+                chartDisplay
             H.div !# "slopeInterceptForm" !. "tab-pane"
                   ! ngController "InterceptEqns" $ do
                 H.div $ do
                     interceptEquations
-                H.div !# "chartDisplay" ! ngController "Graph" $ do
-                    H.div !. "chartGoesHere" $ mempty
+                chartDisplay
+
     )
     [ "js/vendor/angular.min.js"
     , "js/vendor/jqmath-etc-0.4.0.min.js"
@@ -436,6 +435,11 @@ challenge = boilerplate
     ]
     []
   where
+    chartDisplay = do
+        H.div !# "chartDisplay" ! ngController "Graph" $ do
+            H.div !. "chartGoesHere" $ mempty
+            H.span ! customAttribute "my-positioned-soln" "" $
+                str $ "("++ num' "solnX" ++ ", " ++ num' "solnY" ++ ")"
     standardEquations = do
         H.div $ str $ concat
             [ "Is (" , num' "solnX" , ", " , num' "solnY" , ") a solution?" ]
