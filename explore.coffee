@@ -1,6 +1,20 @@
 robots = ['8KV7', '6C19']
 
 angular.module('explore', [])
+    .filter('plusMinus', ->
+        (x, unary = false) ->
+            x_ = Math.abs(x)
+            if x >= 0
+                if unary or x == 0
+                    x
+                else
+                    "+ #{x_}"
+            else # < 0
+                if unary
+                    "-#{x_}"
+                else
+                    "- #{x_}"
+    )
     .controller('Explore', ($scope) ->
         $scope.mockRobot = Robot.mock? && Robot.mock
     )

@@ -355,40 +355,29 @@ explore = boilerplate
     ]
   where
     standardEquations = do
-        H.div !. "eqn-control" !# "leftEqn" $ do
-            H.div ! ngHide "!mockRobot" $ do
-                numInput "x1"
-                "x + "
-                numInput "y1"
-                "y = "
-                numInput "z1"
-            H.div $ do
-                control0 "0" "x1"
-                "x + "
-                control0 "1" "y1"
-                "y = "
-                control0 "2" "z1"
-            H.div $ str $ num "y1" ++ "y = " ++ num "-x1" ++ "x + " ++ num "z1"
-            H.div $ str $ "y = " ++ num "-x1/y1" ++ "x + " ++ num "z1/y1"
-            H.div $ str $ "Slope = " ++ num "-x1/y1"
-            H.div $ str $ "y-intercept = " ++ num "z1/y1"
-        H.div !. "eqn-control" !# "rightEqn" $ do
-            H.div ! ngHide "!mockRobot" $ do
-                numInput "x2"
-                "x + "
-                numInput "y2"
-                "y = "
-                numInput "z2"
-            H.div $ do
-                control1 "0" "x2"
-                "x + "
-                control1 "1" "y2"
-                "y = "
-                control1 "2" "z2"
-            H.div $ str $ num "y2" ++ "y = " ++ num "-x2" ++ "x + " ++ num "z2"
-            H.div $ str $ "y = " ++ num "-x2/y2" ++ "x + " ++ num "z2/y2"
-            H.div $ str $ "Slope = " ++ num "-x2/y2"
-            H.div $ str $ "y-intercept = " ++ num "z2/y2"
+        eqnBreakdown "0" "leftEqn" "x1" "y1" "z1"
+        eqnBreakdown "1" "rightEqn" "x2" "y2" "z2"
+      where
+        eqnBreakdown ctlNr id_ x y z =
+            H.div !. "eqn-control" !# id_ $ do
+                H.div ! ngHide "!mockRobot" $ do
+                    numInput x
+                    "x + "
+                    numInput y
+                    "y = "
+                    numInput z
+                H.div $ do
+                    control ctlNr num' "0" x
+                    "x "
+                    control ctlNr num "1" y
+                    "y = "
+                    control ctlNr num' "2" z
+                H.div $ str $ num' y ++ "y = " ++ num' ("-" ++ x) ++ "x "
+                                     ++ num z
+                H.div $ str $ "y = " ++ num' ("-" ++ x ++ "/" ++ y) ++ "x "
+                                     ++ num (z ++"/"++ y)
+                H.div $ str $ "Slope = " ++ num' ("-" ++ x ++ "/" ++ y)
+                H.div $ str $ "y-intercept = " ++ num' (z ++"/"++ y)
     interceptEquations = do
         H.div !. "eqn-control" !# "leftEqn" $ do
             H.div ! ngHide "!mockRobot" $ do

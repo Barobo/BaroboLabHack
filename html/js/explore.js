@@ -3,7 +3,28 @@ var Robot, event, rb, robots, x;
 
 robots = ['8KV7', '6C19'];
 
-angular.module('explore', []).controller('Explore', function($scope) {
+angular.module('explore', []).filter('plusMinus', function() {
+  return function(x, unary) {
+    var x_;
+    if (unary == null) {
+      unary = false;
+    }
+    x_ = Math.abs(x);
+    if (x >= 0) {
+      if (unary || x === 0) {
+        return x;
+      } else {
+        return "+ " + x_;
+      }
+    } else {
+      if (unary) {
+        return "-" + x_;
+      } else {
+        return "- " + x_;
+      }
+    }
+  };
+}).controller('Explore', function($scope) {
   return $scope.mockRobot = (Robot.mock != null) && Robot.mock;
 }).controller('StandardEqns', function($scope) {
   $scope.selected = [0, 0];
