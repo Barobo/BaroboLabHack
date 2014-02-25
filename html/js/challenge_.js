@@ -30,8 +30,8 @@ angular.module('challenge', []).filter('plusMinus', function() {
   };
 }).controller('Challenge', function($scope) {
   $scope.mockRobot = (Robot.mock != null) && Robot.mock;
-  $scope.solnX = rand(0, 10);
-  return $scope.solnY = rand(0, 10);
+  $scope.solnX = rand(-10, 10);
+  return $scope.solnY = rand(-10, 10);
 }).controller('StandardEqns', function($scope) {
   var x, _ref;
   $scope.selected = [0, 0];
@@ -136,7 +136,7 @@ angular.module('challenge', []).filter('plusMinus', function() {
       tickSize: 2,
       tickDecimals: 0
     },
-    colors: ["red", "blue", "black"]
+    colors: ["black", "red", "blue"]
   };
   $scope.plotChart = function() {
     var a, b, serieses, x;
@@ -159,7 +159,7 @@ angular.module('challenge', []).filter('plusMinus', function() {
       }
       return _results;
     })();
-    serieses.push({
+    serieses.unshift({
       data: [[$scope.solnX, $scope.solnY]],
       points: {
         show: true

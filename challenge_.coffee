@@ -23,8 +23,8 @@ angular.module('challenge', [])
     )
     .controller('Challenge', ($scope) ->
         $scope.mockRobot = Robot.mock? && Robot.mock
-        $scope.solnX = rand(0,10)
-        $scope.solnY = rand(0,10)
+        $scope.solnX = rand(-10,10)
+        $scope.solnY = rand(-10,10)
     )
     .controller('StandardEqns', ($scope) ->
         $scope.selected = [0,0]
@@ -128,7 +128,7 @@ angular.module('challenge', [])
               tickSize: 2,
               tickDecimals: 0,
             },
-            colors: ["red", "blue", "black"]
+            colors: ["black", "red", "blue"]
         }
 
         $scope.plotChart = ->
@@ -137,7 +137,7 @@ angular.module('challenge', [])
                                [$scope.a2, $scope.b2]]
                     for x in [-10, 10]
                         [x, a*x + b]
-            serieses.push({
+            serieses.unshift({
                 data: [[$scope.solnX, $scope.solnY]]
                 points: {show: true}
             })
