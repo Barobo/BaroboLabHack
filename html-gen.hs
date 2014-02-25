@@ -433,8 +433,6 @@ challenge = boilerplate
                     interceptEquations
                 H.div !# "chartDisplay" ! ngController "Graph" $ do
                     H.div !. "chartGoesHere" $ mempty
-        a ! href "challenge.html"
-          !. "next btn btn-large btn-primary" $ "Next"
     )
     [ "js/vendor/angular.min.js"
     , "js/vendor/jqmath-etc-0.4.0.min.js"
