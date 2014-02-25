@@ -128,7 +128,7 @@ angular.module('challenge', [])
               tickSize: 2,
               tickDecimals: 0,
             },
-            colors: ["red", "blue"]
+            colors: ["red", "blue", "black"]
         }
 
         $scope.plotChart = ->
@@ -137,6 +137,11 @@ angular.module('challenge', [])
                                [$scope.a2, $scope.b2]]
                     for x in [-10, 10]
                         [x, a*x + b]
+            serieses.push({
+                data: [[$scope.solnX, $scope.solnY]]
+                points: {show: true}
+            })
+
             $.plot($(".chartGoesHere", $element), serieses, chartCfg)
 
 

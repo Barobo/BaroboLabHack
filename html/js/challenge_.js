@@ -136,7 +136,7 @@ angular.module('challenge', []).filter('plusMinus', function() {
       tickSize: 2,
       tickDecimals: 0
     },
-    colors: ["red", "blue"]
+    colors: ["red", "blue", "black"]
   };
   $scope.plotChart = function() {
     var a, b, serieses, x;
@@ -159,6 +159,12 @@ angular.module('challenge', []).filter('plusMinus', function() {
       }
       return _results;
     })();
+    serieses.push({
+      data: [[$scope.solnX, $scope.solnY]],
+      points: {
+        show: true
+      }
+    });
     return $.plot($(".chartGoesHere", $element), serieses, chartCfg);
   };
   $('.chartGoesHere', $element).height("400px").width("400px");
