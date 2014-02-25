@@ -38,13 +38,13 @@ boilerplate navlist content scripts styles =
         H.head $ do
             meta ! charset "utf-8"
             H.title "BaroboLab - DEMO"
+            scripts'
             styles'
         body $ do
             nav ! class_ "app" $ do
                 a ! href "index.html" $ img ! src "img/barobo_logo.png"
                 ol ! class_ "nav nav-stacked nav-pills" $ sequence_ navlist
             content
-            scripts'
 
 boilerplate' n c = boilerplate n (section c) [] []
 
