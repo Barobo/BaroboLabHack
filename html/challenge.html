@@ -68,7 +68,7 @@
                 <div id="standardForm" class="tab-pane active" ng-controller="StandardEqns">
                     <div>
                         <div>
-                            Is ({{solnX| number }}, {{solnY| number }}) a solution?
+                            Is ({{solnX| number | plusMinus:true}}, {{solnY| number | plusMinus:true}}) a solution?
                         </div>
                         <div class="eqn-control" id="leftEqn">
                             <div ng-hide="!mockRobot">
@@ -80,25 +80,25 @@
                             </div>
                             <div>
                                 <span ng-class="{activeControl: selected[0] == 0}">
-                                    {{x1| number }}
+                                    {{x1| number | plusMinus:true}}
                                 </span>
-                                x + 
+                                x 
                                 <span ng-class="{activeControl: selected[0] == 1}">
-                                    {{y1| number }}
+                                    {{y1| number | plusMinus}}
                                 </span>
                                 y = 
                                 <span ng-class="{activeControl: selected[0] == 2}">
-                                    {{z1| number }}
+                                    {{z1| number | plusMinus:true}}
                                 </span>
                             </div>
                             <div>
-                                check:{{x1| number }}({{solnX| number }}) + {{y1| number }}({{solnY| number }}) = {{z1| number }}
+                                check:{{x1| number | plusMinus:true}}({{solnX| number | plusMinus:true}}) {{y1| number | plusMinus}}({{solnY| number | plusMinus:true}}) = {{z1| number | plusMinus:true}}
                             </div>
                             <div>
-                                {{x1 * solnX| number }} + {{y1 * solnY| number }} = {{z1| number }}
+                                {{x1 * solnX| number | plusMinus:true}} {{y1 * solnY| number | plusMinus}} = {{z1| number | plusMinus:true}}
                             </div>
                             <div>
-                                {{x1 * solnX + y1 * solnY| number }} = {{z1| number }}
+                                {{x1 * solnX + y1 * solnY| number | plusMinus:true}} = {{z1| number | plusMinus:true}}
                             </div>
                             <div ng-show="x1 * solnX + y1 * solnY == z1">
                                 ☑
@@ -117,25 +117,25 @@
                             </div>
                             <div>
                                 <span ng-class="{activeControl: selected[0] == 0}">
-                                    {{x2| number }}
+                                    {{x2| number | plusMinus:true}}
                                 </span>
-                                x + 
+                                x 
                                 <span ng-class="{activeControl: selected[0] == 1}">
-                                    {{y2| number }}
+                                    {{y2| number | plusMinus}}
                                 </span>
                                 y = 
                                 <span ng-class="{activeControl: selected[0] == 2}">
-                                    {{z2| number }}
+                                    {{z2| number | plusMinus:true}}
                                 </span>
                             </div>
                             <div>
-                                check:{{x2| number }}({{solnX| number }}) + {{y2| number }}({{solnY| number }}) = {{z2| number }}
+                                check:{{x2| number | plusMinus:true}}({{solnX| number | plusMinus:true}}) {{y2| number | plusMinus}}({{solnY| number | plusMinus:true}}) = {{z2| number | plusMinus:true}}
                             </div>
                             <div>
-                                {{x2 * solnX| number }} + {{y2 * solnY| number }} = {{z2| number }}
+                                {{x2 * solnX| number | plusMinus:true}} {{y2 * solnY| number | plusMinus}} = {{z2| number | plusMinus:true}}
                             </div>
                             <div>
-                                {{x2 * solnX + y2 * solnY| number }} = {{z2| number }}
+                                {{x2 * solnX + y2 * solnY| number | plusMinus:true}} = {{z2| number | plusMinus:true}}
                             </div>
                             <div ng-show="x1 * solnX + y1 * solnY == z1">
                                 ☑
@@ -153,30 +153,30 @@
                 <div id="slopeInterceptForm" class="tab-pane" ng-controller="InterceptEqns">
                     <div>
                         <div>
-                            Is ({{solnX| number }}, {{solnY| number }}) a solution?
+                            Is ({{solnX| number | plusMinus:true}}, {{solnY| number | plusMinus:true}}) a solution?
                         </div>
                         <div class="eqn-control" id="leftEqn">
                             <div ng-hide="!mockRobot">
                                 y = 
                                 <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="a1">
-                                x + 
+                                x 
                                 <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="b1">
                             </div>
                             <div>
                                 y = 
                                 <span ng-class="{activeControl: selected[0] == 0}">
-                                    {{a1| number }}
+                                    {{a1| number | plusMinus:true}}
                                 </span>
-                                x + 
+                                x 
                                 <span ng-class="{activeControl: selected[0] == 1}">
-                                    {{b1| number }}
+                                    {{b1| number | plusMinus}}
                                 </span>
                             </div>
                             <div>
-                                {{solnY| number }} = {{a1| number }}({{solnX| number }}) + {{b1| number }}
+                                {{solnY| number | plusMinus:true}} = {{a1| number | plusMinus:true}}({{solnX| number | plusMinus:true}}) {{b1| number | plusMinus}}
                             </div>
                             <div>
-                                {{solnY| number }} = {{a1 * solnX + b1| number }}
+                                {{solnY| number | plusMinus:true}} = {{a1 * solnX + b1| number | plusMinus:true}}
                             </div>
                             <div ng-show="solnY == a1 * solnX + b1">
                                 ☑
@@ -189,24 +189,24 @@
                             <div ng-hide="!mockRobot">
                                 y = 
                                 <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="a2">
-                                x + 
+                                x 
                                 <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="b2">
                             </div>
                             <div>
                                 y = 
                                 <span ng-class="{activeControl: selected[0] == 0}">
-                                    {{a2| number }}
+                                    {{a2| number | plusMinus:true}}
                                 </span>
-                                x + 
+                                x 
                                 <span ng-class="{activeControl: selected[0] == 1}">
-                                    {{b2| number }}
+                                    {{b2| number | plusMinus}}
                                 </span>
                             </div>
                             <div>
-                                {{solnY| number }} = {{a2| number }}({{solnX| number }}) + {{b2| number }}
+                                {{solnY| number | plusMinus:true}} = {{a2| number | plusMinus:true}}({{solnX| number | plusMinus:true}}) {{b2| number | plusMinus}}
                             </div>
                             <div>
-                                {{solnY| number }} = {{a2 * solnX + b2| number }}
+                                {{solnY| number | plusMinus:true}} = {{a2 * solnX + b2| number | plusMinus:true}}
                             </div>
                             <div ng-show="solnY == a2 * solnX + b2">
                                 ☑

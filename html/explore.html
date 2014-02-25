@@ -80,28 +80,28 @@
                             </div>
                             <div>
                                 <span ng-class="{activeControl: selected[0] == 0}">
-                                    {{x1| number }}
+                                    {{x1| number | plusMinus}}
                                 </span>
                                 x + 
                                 <span ng-class="{activeControl: selected[0] == 1}">
-                                    {{y1| number }}
+                                    {{y1| number | plusMinus}}
                                 </span>
                                 y = 
                                 <span ng-class="{activeControl: selected[0] == 2}">
-                                    {{z1| number }}
+                                    {{z1| number | plusMinus}}
                                 </span>
                             </div>
                             <div>
-                                {{y1| number }}y = {{-x1| number }}x + {{z1| number }}
+                                {{y1| number | plusMinus}}y = {{-x1| number | plusMinus}}x + {{z1| number | plusMinus}}
                             </div>
                             <div>
-                                y = {{-x1/y1| number }}x + {{z1/y1| number }}
+                                y = {{-x1/y1| number | plusMinus}}x + {{z1/y1| number | plusMinus}}
                             </div>
                             <div>
-                                Slope = {{-x1/y1| number }}
+                                Slope = {{-x1/y1| number | plusMinus}}
                             </div>
                             <div>
-                                y-intercept = {{z1/y1| number }}
+                                y-intercept = {{z1/y1| number | plusMinus}}
                             </div>
                         </div>
                         <div class="eqn-control" id="rightEqn">
@@ -114,28 +114,28 @@
                             </div>
                             <div>
                                 <span ng-class="{activeControl: selected[1] == 0}">
-                                    {{x2| number }}
+                                    {{x2| number | plusMinus}}
                                 </span>
                                 x + 
                                 <span ng-class="{activeControl: selected[1] == 1}">
-                                    {{y2| number }}
+                                    {{y2| number | plusMinus}}
                                 </span>
                                 y = 
                                 <span ng-class="{activeControl: selected[1] == 2}">
-                                    {{z2| number }}
+                                    {{z2| number | plusMinus}}
                                 </span>
                             </div>
                             <div>
-                                {{y2| number }}y = {{-x2| number }}x + {{z2| number }}
+                                {{y2| number | plusMinus}}y = {{-x2| number | plusMinus}}x + {{z2| number | plusMinus}}
                             </div>
                             <div>
-                                y = {{-x2/y2| number }}x + {{z2/y2| number }}
+                                y = {{-x2/y2| number | plusMinus}}x + {{z2/y2| number | plusMinus}}
                             </div>
                             <div>
-                                Slope = {{-x2/y2| number }}
+                                Slope = {{-x2/y2| number | plusMinus}}
                             </div>
                             <div>
-                                y-intercept = {{z2/y2| number }}
+                                y-intercept = {{z2/y2| number | plusMinus}}
                             </div>
                         </div>
                     </div>
@@ -157,18 +157,18 @@
                             <div>
                                 y = 
                                 <span ng-class="{activeControl: selected[0] == 0}">
-                                    {{a1| number }}
+                                    {{a1| number | plusMinus}}
                                 </span>
                                 x + 
                                 <span ng-class="{activeControl: selected[0] == 1}">
-                                    {{b1| number }}
+                                    {{b1| number | plusMinus}}
                                 </span>
                             </div>
                             <div>
-                                Slope = {{a1| number }}
+                                Slope = {{a1| number | plusMinus}}
                             </div>
                             <div>
-                                y-intercept = {{b1| number }}
+                                y-intercept = {{b1| number | plusMinus}}
                             </div>
                         </div>
                         <div class="eqn-control" id="rightEqn">
@@ -181,18 +181,18 @@
                             <div>
                                 y = 
                                 <span ng-class="{activeControl: selected[1] == 0}">
-                                    {{a2| number }}
+                                    {{a2| number | plusMinus}}
                                 </span>
                                 x + 
                                 <span ng-class="{activeControl: selected[1] == 1}">
-                                    {{b2| number }}
+                                    {{b2| number | plusMinus}}
                                 </span>
                             </div>
                             <div>
-                                Slope = {{a2| number }}
+                                Slope = {{a2| number | plusMinus}}
                             </div>
                             <div>
-                                y-intercept = {{b2| number }}
+                                y-intercept = {{b2| number | plusMinus}}
                             </div>
                         </div>
                     </div>

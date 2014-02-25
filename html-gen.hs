@@ -301,17 +301,20 @@ tabLink link title =
   a ! href (val $ '#' : link) ! dataAttribute "toggle" "tab" $ title
 numInput m = input ! type_ "number" ! maxlength "3" ! size "3"
                  ! A.max "99" ! A.min "-99" ! ngModel m
-control0 = control "0"
-control1 = control "1"
-control rob n v =
+control0 = control "0" num
+control1 = control "1" num
+control0' = control "0" num'
+control1' = control "1" num'
+control rob numFunc n v =
     H.span
         ! activeControlClass rob n
-        $ str $ num v
+        $ str $ numFunc v
 activeControlClass rob n =
     ngClass $ val
             $ "{activeControl: selected["
                 ++ rob ++ "] == " ++ n ++ "}"
-num expr = "{{" ++ expr ++ "| number }}"
+num expr = "{{" ++ expr ++ "| number | plusMinus}}"
+num' expr = "{{" ++ expr ++ "| number | plusMinus:true}}"
 
 explore = boilerplate
     (labNav "Explore")
@@ -443,7 +446,7 @@ challenge = boilerplate
   where
     standardEquations = do
         H.div $ str $ concat
-            [ "Is (" , num "solnX" , ", " , num "solnY" , ") a solution?" ]
+            [ "Is (" , num' "solnX" , ", " , num' "solnY" , ") a solution?" ]
         H.div !. "eqn-control" !# "leftEqn" $ do
             H.div ! ngHide "!mockRobot" $ do
                 numInput "x1"
@@ -452,19 +455,19 @@ challenge = boilerplate
                 "y = "
                 numInput "z1"
             H.div $ do
-                control0 "0" "x1"
-                "x + "
+                control0' "0" "x1"
+                "x "
                 control0 "1" "y1"
                 "y = "
-                control0 "2" "z1"
+                control0' "2" "z1"
             H.div $ str $ concat
-                [ "check:" , num "x1" , "(" , num "solnX" , ") + " , num "y1"
-                , "(" , num "solnY" , ") = " , num "z1" ]
+                [ "check:" , num' "x1" , "(" , num' "solnX" , ") " , num "y1"
+                , "(" , num' "solnY" , ") = " , num' "z1" ]
             H.div $ str $ concat
-                [ num "x1 * solnX" , " + " , num "y1 * solnY" , " = "
-                , num "z1" ]
+                [ num' "x1 * solnX" , " " , num "y1 * solnY" , " = "
+                , num' "z1" ]
             H.div $ str $ concat
-                [ num "x1 * solnX + y1 * solnY" , " = " , num "z1" ]
+                [ num' "x1 * solnX + y1 * solnY" , " = " , num' "z1" ]
             H.div ! ngShow eqn $ "☑"
             H.div ! ngHide eqn $ "☐"
         H.div !. "eqn-control" !# "leftEqn" $ do
@@ -475,57 +478,57 @@ challenge = boilerplate
                 "y = "
                 numInput "z2"
             H.div $ do
-                control0 "0" "x2"
-                "x + "
+                control0' "0" "x2"
+                "x "
                 control0 "1" "y2"
                 "y = "
-                control0 "2" "z2"
+                control0' "2" "z2"
             H.div $ str $ concat
-                [ "check:" , num "x2" , "(" , num "solnX" , ") + " , num "y2"
-                , "(" , num "solnY" , ") = " , num "z2" ]
+                [ "check:" , num' "x2" , "(" , num' "solnX" , ") " , num "y2"
+                , "(" , num' "solnY" , ") = " , num' "z2" ]
             H.div $ str $ concat
-                [ num "x2 * solnX" , " + " , num "y2 * solnY" , " = "
-                , num "z2" ]
+                [ num' "x2 * solnX" , " " , num "y2 * solnY" , " = "
+                , num' "z2" ]
             H.div $ str $ concat
-                [ num "x2 * solnX + y2 * solnY" , " = " , num "z2" ]
+                [ num' "x2 * solnX + y2 * solnY" , " = " , num' "z2" ]
             H.div ! ngShow eqn $ "☑"
             H.div ! ngHide eqn $ "☐"
     eqn = "x1 * solnX + y1 * solnY == z1"
     interceptEquations = do
         H.div $ str $ concat
-            [ "Is (" , num "solnX" , ", " , num "solnY" , ") a solution?" ]
+            [ "Is (" , num' "solnX" , ", " , num' "solnY" , ") a solution?" ]
         H.div !. "eqn-control" !# "leftEqn" $ do
             H.div ! ngHide "!mockRobot" $ do
                 "y = "
                 numInput "a1"
-                "x + "
+                "x "
                 numInput "b1"
             H.div $ do
                 "y = "
-                control0 "0" "a1"
-                "x + "
+                control0' "0" "a1"
+                "x "
                 control0 "1" "b1"
             H.div $ str $ concat
-                [ num "solnY", " = ", num "a1", "(", num "solnX", ") + "
+                [ num' "solnY", " = ", num' "a1", "(", num' "solnX", ") "
                 , num "b1" ]
-            H.div $ str $ num "solnY" ++ " = " ++ num "a1 * solnX + b1"
+            H.div $ str $ num' "solnY" ++ " = " ++ num' "a1 * solnX + b1"
             H.div ! ngShow "solnY == a1 * solnX + b1" $ "☑"
             H.div ! ngHide "solnY == a1 * solnX + b1" $ "☐"
         H.div !. "eqn-control" !# "rightEqn" $ do
             H.div ! ngHide "!mockRobot" $ do
                 "y = "
                 numInput "a2"
-                "x + "
+                "x "
                 numInput "b2"
             H.div $ do
                 "y = "
-                control0 "0" "a2"
-                "x + "
+                control0' "0" "a2"
+                "x "
                 control0 "1" "b2"
             H.div $ str $ concat
-                [ num "solnY", " = ", num "a2", "(", num "solnX", ") + "
+                [ num' "solnY", " = ", num' "a2", "(", num' "solnX", ") "
                 , num "b2" ]
-            H.div $ str $ num "solnY" ++ " = " ++ num "a2 * solnX + b2"
+            H.div $ str $ num' "solnY" ++ " = " ++ num' "a2 * solnX + b2"
             H.div ! ngShow "solnY == a2 * solnX + b2" $ "☑"
             H.div ! ngHide "solnY == a2 * solnX + b2" $ "☐"
 

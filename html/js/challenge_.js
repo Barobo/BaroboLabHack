@@ -7,7 +7,28 @@ rand = function(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 };
 
-angular.module('challenge', []).controller('Challenge', function($scope) {
+angular.module('challenge', []).filter('plusMinus', function() {
+  return function(x, unary) {
+    var x_;
+    if (unary == null) {
+      unary = false;
+    }
+    x_ = Math.abs(x);
+    if (x >= 0) {
+      if (unary || x === 0) {
+        return x;
+      } else {
+        return "+ " + x_;
+      }
+    } else {
+      if (unary) {
+        return "-" + x_;
+      } else {
+        return "- " + x_;
+      }
+    }
+  };
+}).controller('Challenge', function($scope) {
   $scope.mockRobot = (Robot.mock != null) && Robot.mock;
   $scope.solnX = rand(0, 10);
   return $scope.solnY = rand(0, 10);
