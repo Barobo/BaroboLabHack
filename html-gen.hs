@@ -300,7 +300,7 @@ calculateChart = boilerplate
 tabLink link title =
   a ! href (val $ '#' : link) ! dataAttribute "toggle" "tab" $ title
 numInput m = input ! type_ "number" ! maxlength "3" ! size "3"
-                 ! A.max "99" ! A.min "-99" ! ngModel m
+                 ! A.max "99" ! A.min "-99" ! ngModel (val m)
 control0 = control "0" num
 control1 = control "1" num
 control0' = control "0" num'
@@ -447,53 +447,35 @@ challenge = boilerplate
     standardEquations = do
         H.div $ str $ concat
             [ "Is (" , num' "solnX" , ", " , num' "solnY" , ") a solution?" ]
-        H.div !. "eqn-control" !# "leftEqn" $ do
-            H.div ! ngHide "!mockRobot" $ do
-                numInput "x1"
-                "x + "
-                numInput "y1"
-                "y = "
-                numInput "z1"
-            H.div $ do
-                control0' "0" "x1"
-                "x "
-                control0 "1" "y1"
-                "y = "
-                control0' "2" "z1"
-            H.div $ str $ concat
-                [ "check:" , num' "x1" , "(" , num' "solnX" , ") " , num "y1"
-                , "(" , num' "solnY" , ") = " , num' "z1" ]
-            H.div $ str $ concat
-                [ num' "x1 * solnX" , " " , num "y1 * solnY" , " = "
-                , num' "z1" ]
-            H.div $ str $ concat
-                [ num' "x1 * solnX + y1 * solnY" , " = " , num' "z1" ]
-            H.div ! ngShow eqn $ "☑"
-            H.div ! ngHide eqn $ "☐"
-        H.div !. "eqn-control" !# "leftEqn" $ do
-            H.div ! ngHide "!mockRobot" $ do
-                numInput "x2"
-                "x + "
-                numInput "y2"
-                "y = "
-                numInput "z2"
-            H.div $ do
-                control0' "0" "x2"
-                "x "
-                control0 "1" "y2"
-                "y = "
-                control0' "2" "z2"
-            H.div $ str $ concat
-                [ "check:" , num' "x2" , "(" , num' "solnX" , ") " , num "y2"
-                , "(" , num' "solnY" , ") = " , num' "z2" ]
-            H.div $ str $ concat
-                [ num' "x2 * solnX" , " " , num "y2 * solnY" , " = "
-                , num' "z2" ]
-            H.div $ str $ concat
-                [ num' "x2 * solnX + y2 * solnY" , " = " , num' "z2" ]
-            H.div ! ngShow eqn $ "☑"
-            H.div ! ngHide eqn $ "☐"
-    eqn = "x1 * solnX + y1 * solnY == z1"
+        eqnBreakdown "leftEqn" "x1" "y1" "z1"
+        eqnBreakdown "rightEqn" "x2" "y2" "z2"
+      where
+        eqnBreakdown id_ x y z =
+            H.div !. "eqn-control" !# id_ $ do
+                H.div ! ngHide "!mockRobot" $ do
+                    numInput x
+                    "x + "
+                    numInput y
+                    "y = "
+                    numInput z
+                H.div $ do
+                    control0' "0" x
+                    "x "
+                    control0 "1" y
+                    "y = "
+                    control0' "2" z
+                H.div $ str $ concat
+                    [ "check:" , num' x , "(" , num' "solnX" , ") " , num y
+                    , "(" , num' "solnY" , ") = " , num' z ]
+                H.div $ str $ concat
+                    [ (num' $ x ++ " * solnX") , " " , (num $ y ++ " * solnY") , " = "
+                    , num' z ]
+                H.div $ str $ concat
+                    [ (num' $ x ++ " * solnX + " ++ y ++ " * solnY") , " = " , num' z ]
+                H.div ! ngShow eqn $ "☑"
+                H.div ! ngHide eqn $ "☐"
+          where
+            eqn = val $ x ++ " * solnX + " ++ y ++ " * solnY == " ++ z
     interceptEquations = do
         H.div $ str $ concat
             [ "Is (" , num' "solnX" , ", " , num' "solnY" , ") a solution?" ]

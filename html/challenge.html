@@ -107,7 +107,7 @@
                                 ☐
                             </div>
                         </div>
-                        <div class="eqn-control" id="leftEqn">
+                        <div class="eqn-control" id="rightEqn">
                             <div ng-hide="!mockRobot">
                                 <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="x2">
                                 x + 
@@ -137,10 +137,10 @@
                             <div>
                                 {{x2 * solnX + y2 * solnY| number | plusMinus:true}} = {{z2| number | plusMinus:true}}
                             </div>
-                            <div ng-show="x1 * solnX + y1 * solnY == z1">
+                            <div ng-show="x2 * solnX + y2 * solnY == z2">
                                 ☑
                             </div>
-                            <div ng-hide="x1 * solnX + y1 * solnY == z1">
+                            <div ng-hide="x2 * solnX + y2 * solnY == z2">
                                 ☐
                             </div>
                         </div>
