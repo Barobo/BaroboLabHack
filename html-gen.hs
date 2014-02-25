@@ -450,10 +450,10 @@ challenge = boilerplate
     standardEquations = do
         H.div $ str $ concat
             [ "Is (" , num' "solnX" , ", " , num' "solnY" , ") a solution?" ]
-        eqnBreakdown "leftEqn" "x1" "y1" "z1"
-        eqnBreakdown "rightEqn" "x2" "y2" "z2"
+        eqnBreakdown "0" "leftEqn" "x1" "y1" "z1"
+        eqnBreakdown "1" "rightEqn" "x2" "y2" "z2"
       where
-        eqnBreakdown id_ x y z =
+        eqnBreakdown ctlNr id_ x y z =
             H.div !. "eqn-control" !# id_ $ do
                 H.div ! ngHide "!mockRobot" $ do
                     numInput x
@@ -462,11 +462,11 @@ challenge = boilerplate
                     "y = "
                     numInput z
                 H.div $ do
-                    control0' "0" x
+                    control ctlNr num' "0" x
                     "x "
-                    control0 "1" y
+                    control ctlNr num  "1" y
                     "y = "
-                    control0' "2" z
+                    control ctlNr num' "2" z
                 H.div $ str $ concat
                     [ "check:" , num' x , "(" , num' "solnX" , ") " , num y
                     , "(" , num' "solnY" , ") = " , num' z ]
@@ -482,10 +482,10 @@ challenge = boilerplate
     interceptEquations = do
         H.div $ str $ concat
             [ "Is (" , num' "solnX" , ", " , num' "solnY" , ") a solution?" ]
-        eqnBreakdown "leftEqn" "a1" "b1"
-        eqnBreakdown "rightEqn" "a2" "b2"
+        eqnBreakdown "0" "leftEqn" "a1" "b1"
+        eqnBreakdown "1" "rightEqn" "a2" "b2"
       where
-        eqnBreakdown id_ a b =
+        eqnBreakdown ctlNr id_ a b =
             H.div !. "eqn-control" !# id_ $ do
                 H.div ! ngHide "!mockRobot" $ do
                     "y = "
@@ -494,9 +494,9 @@ challenge = boilerplate
                     numInput b
                 H.div $ do
                     "y = "
-                    control0' "0" a
+                    control ctlNr num' "0" a
                     "x "
-                    control0 "1" b
+                    control ctlNr num "1" b
                 H.div $ str $ concat
                     [ num' "solnY", " = ", num' a, "(", num' "solnX", ") "
                     , num b ]
