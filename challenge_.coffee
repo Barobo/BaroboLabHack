@@ -7,6 +7,22 @@ rand = (min, max) ->
     Math.floor(Math.random() * (max - min) + min)
 
 angular.module('challenge', [])
+    .directive('eqnGraph', ->
+        compile: (element, attrs) ->
+            element.css(
+                width: '400px'
+                height: '400px'
+            )
+
+            (scope, element, attrs) ->
+                scope.$watchCollection(
+                    "[#{attrs.eqnConfig}, #{attrs.eqnData}]"
+                    ([cfg, data]) ->
+                            $.plot(element, data, cfg)
+                )
+
+
+    )
     .filter('plusMinus', ->
         (x, unary = false) ->
             x_ = Math.abs(x)
@@ -101,7 +117,7 @@ angular.module('challenge', [])
             )
     )
     .controller('Graph', ($scope, $element) ->
-        chartCfg = {
+        $scope.chartCfg = chartCfg = {
             grid: {
                 markings: [
                     {
@@ -131,38 +147,28 @@ angular.module('challenge', [])
             colors: ["black", "red", "blue"]
         }
 
-        $scope.plotChart = ->
-            serieses =
-                for [a, b] in [[$scope.a1, $scope.b1],
-                               [$scope.a2, $scope.b2]]
+        mkSeries = (a1, b1, a2, b2, solnX, solnY) ->
+            s = for [a, b] in [[a1, b1],
+                               [a2, b2]]
                     for x in [-10, 10]
                         [x, a*x + b]
-            serieses.unshift({
-                data: [[$scope.solnX, $scope.solnY]]
+            s.unshift({
+                data: [[solnX, solnY]]
                 points: {show: true}
             })
+            s
 
-            $.plot($(".chartGoesHere", $element), serieses, chartCfg)
-
-
-        $('.chartGoesHere', $element).height("400px").width("400px")
-
+        $scope.serieses = mkSeries($scope.a1, $scope.b1, $scope.a2
+                                  ,$scope.b2, $scope.solnX, $scope.solnY)
         $scope.$watch(
             -> [ $scope.a1, $scope.b1 ,
-                 $scope.a2, $scope.b2 ]
-            $scope.plotChart
+                 $scope.a2, $scope.b2 ,
+                 $scope.solnX, $scope.solnY ]
+            ([a1, b1, a2, b2, solnX, solnY]) ->
+                $scope.serieses = mkSeries(a1, b1, a2 ,b2, solnX, solnY)
             true
         )
     )
-
-# Without this, the chart on the hidden tab draws funny. Perhaps because it
-# is hidden, and some size information is wrong? Anyway, this ensures the
-# chart is redrawn after the tab is visible -- and thus drawn correctly.
-$('a[data-toggle="tab"]').on('shown.bs.tab', (ev) ->
-    # Gets the scope of the chart div.
-    s = $('.chartGoesHere', $(ev.target).attr("href")).scope()
-    s.plotChart()
-)
 
 ##
 ## Set up mock robot if necessary

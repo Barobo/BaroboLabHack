@@ -437,9 +437,10 @@ challenge = boilerplate
   where
     chartDisplay = do
         H.div !# "chartDisplay" ! ngController "Graph" $ do
-            H.div !. "chartGoesHere" $ mempty
-            {-H.span ! customAttribute "my-positioned-soln" "" $-}
-                {-str $ "("++ num' "solnX" ++ ", " ++ num' "solnY" ++ ")"-}
+            H.div ! customAttribute "eqn-graph" ""
+                  ! customAttribute "eqn-data" "serieses"
+                  ! customAttribute "eqn-config" "chartCfg"
+                  $ mempty
     standardEquations = do
         H.div $ str $ concat
             [ "Is (" , num' "solnX" , ", " , num' "solnY" , ") a solution?" ]
@@ -483,7 +484,7 @@ challenge = boilerplate
                 H.div ! ngHide "!mockRobot" $ do
                     "y = "
                     numInput a
-                    "x "
+                    "x + "
                     numInput b
                 H.div $ do
                     "y = "

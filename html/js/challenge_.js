@@ -7,7 +7,23 @@ rand = function(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 };
 
-angular.module('challenge', []).filter('plusMinus', function() {
+angular.module('challenge', []).directive('eqnGraph', function() {
+  return {
+    compile: function(element, attrs) {
+      element.css({
+        width: '400px',
+        height: '400px'
+      });
+      return function(scope, element, attrs) {
+        return scope.$watchCollection("[" + attrs.eqnConfig + ", " + attrs.eqnData + "]", function(_arg) {
+          var cfg, data;
+          cfg = _arg[0], data = _arg[1];
+          return $.plot(element, data, cfg);
+        });
+      };
+    }
+  };
+}).filter('plusMinus', function() {
   return function(x, unary) {
     var x_;
     if (unary == null) {
@@ -103,8 +119,8 @@ angular.module('challenge', []).filter('plusMinus', function() {
     });
   };
 }).controller('Graph', function($scope, $element) {
-  var chartCfg;
-  chartCfg = {
+  var chartCfg, mkSeries;
+  $scope.chartCfg = chartCfg = {
     grid: {
       markings: [
         {
@@ -138,11 +154,11 @@ angular.module('challenge', []).filter('plusMinus', function() {
     },
     colors: ["black", "red", "blue"]
   };
-  $scope.plotChart = function() {
-    var a, b, serieses, x;
-    serieses = (function() {
+  mkSeries = function(a1, b1, a2, b2, solnX, solnY) {
+    var a, b, s, x;
+    s = (function() {
       var _i, _len, _ref, _ref1, _results;
-      _ref = [[$scope.a1, $scope.b1], [$scope.a2, $scope.b2]];
+      _ref = [[a1, b1], [a2, b2]];
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         _ref1 = _ref[_i], a = _ref1[0], b = _ref1[1];
@@ -159,24 +175,22 @@ angular.module('challenge', []).filter('plusMinus', function() {
       }
       return _results;
     })();
-    serieses.unshift({
-      data: [[$scope.solnX, $scope.solnY]],
+    s.unshift({
+      data: [[solnX, solnY]],
       points: {
         show: true
       }
     });
-    return $.plot($(".chartGoesHere", $element), serieses, chartCfg);
+    return s;
   };
-  $('.chartGoesHere', $element).height("400px").width("400px");
+  $scope.serieses = mkSeries($scope.a1, $scope.b1, $scope.a2, $scope.b2, $scope.solnX, $scope.solnY);
   return $scope.$watch(function() {
-    return [$scope.a1, $scope.b1, $scope.a2, $scope.b2];
-  }, $scope.plotChart, true);
-});
-
-$('a[data-toggle="tab"]').on('shown.bs.tab', function(ev) {
-  var s;
-  s = $('.chartGoesHere', $(ev.target).attr("href")).scope();
-  return s.plotChart();
+    return [$scope.a1, $scope.b1, $scope.a2, $scope.b2, $scope.solnX, $scope.solnY];
+  }, function(_arg) {
+    var a1, a2, b1, b2, solnX, solnY;
+    a1 = _arg[0], b1 = _arg[1], a2 = _arg[2], b2 = _arg[3], solnX = _arg[4], solnY = _arg[5];
+    return $scope.serieses = mkSeries(a1, b1, a2, b2, solnX, solnY);
+  }, true);
 });
 
 Robot = (function() {
