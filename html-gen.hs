@@ -438,8 +438,8 @@ challenge = boilerplate
     chartDisplay = do
         H.div !# "chartDisplay" ! ngController "Graph" $ do
             H.div !. "chartGoesHere" $ mempty
-            H.span ! customAttribute "my-positioned-soln" "" $
-                str $ "("++ num' "solnX" ++ ", " ++ num' "solnY" ++ ")"
+            {-H.span ! customAttribute "my-positioned-soln" "" $-}
+                {-str $ "("++ num' "solnX" ++ ", " ++ num' "solnY" ++ ")"-}
     standardEquations = do
         H.div $ str $ concat
             [ "Is (" , num' "solnX" , ", " , num' "solnY" , ") a solution?" ]
