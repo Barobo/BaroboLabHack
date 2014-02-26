@@ -385,33 +385,23 @@ explore = boilerplate
                 H.div $ str $ "Slope = " ++ num' ("-" ++ x ++ "/" ++ y)
                 H.div $ str $ "y-intercept = " ++ num' (z ++"/"++ y)
     interceptEquations = do
-        H.div !. "eqn-control" !# "leftEqn" $ do
-            H.div ! ngHide "!mockRobot" $ do
-                "y = "
-                numInput "a1"
-                "x + "
-                numInput "b1"
-            H.div $ do
-                "y = "
-                control0 "0" "a1"
-                "x + "
-                control0 "1" "b1"
-            H.div $ str $ "Slope = " ++ num "a1"
-            H.div $ str $ "y-intercept = " ++ num "b1"
-        H.div !. "eqn-control" !# "rightEqn" $ do
-            H.div ! ngHide "!mockRobot" $ do
-                "y = "
-                numInput "a2"
-                "x + "
-                numInput "b2"
-            H.div $ do
-                "y = "
-                control1 "0" "a2"
-                "x + "
-                control1 "1" "b2"
-            H.div $ str $ "Slope = " ++ num "a2"
-            H.div $ str $ "y-intercept = " ++ num "b2"
-
+        eqnBreakdown "0" "leftEqn" "a1" "b1"
+        eqnBreakdown "1" "rightEqn" "a2" "b2"
+      where
+        eqnBreakdown ctlNr id_ a b =
+            H.div !. "eqn-control" !# id_ $ do
+                H.div ! ngHide "!mockRobot" $ do
+                    "y = "
+                    numInput a
+                    "x + "
+                    numInput b
+                H.div $ do
+                    "y = "
+                    control ctlNr num' "0" a
+                    "x "
+                    control ctlNr num "1" b
+                H.div $ str $ "Slope = " ++ num' a
+                H.div $ str $ "y-intercept = " ++ num' b
 
 challenge = boilerplate
     (labNav "Challenge")

@@ -169,18 +169,18 @@
                             <div>
                                 y = 
                                 <span ng-class="{activeControl: selected[0] == 0}">
-                                    {{a1| number | plusMinus}}
+                                    {{a1| number | plusMinus:true}}
                                 </span>
-                                x + 
+                                x 
                                 <span ng-class="{activeControl: selected[0] == 1}">
                                     {{b1| number | plusMinus}}
                                 </span>
                             </div>
                             <div>
-                                Slope = {{a1| number | plusMinus}}
+                                Slope = {{a1| number | plusMinus:true}}
                             </div>
                             <div>
-                                y-intercept = {{b1| number | plusMinus}}
+                                y-intercept = {{b1| number | plusMinus:true}}
                             </div>
                         </div>
                         <div class="eqn-control" id="rightEqn">
@@ -193,18 +193,18 @@
                             <div>
                                 y = 
                                 <span ng-class="{activeControl: selected[1] == 0}">
-                                    {{a2| number | plusMinus}}
+                                    {{a2| number | plusMinus:true}}
                                 </span>
-                                x + 
+                                x 
                                 <span ng-class="{activeControl: selected[1] == 1}">
                                     {{b2| number | plusMinus}}
                                 </span>
                             </div>
                             <div>
-                                Slope = {{a2| number | plusMinus}}
+                                Slope = {{a2| number | plusMinus:true}}
                             </div>
                             <div>
-                                y-intercept = {{b2| number | plusMinus}}
+                                y-intercept = {{b2| number | plusMinus:true}}
                             </div>
                         </div>
                     </div>
