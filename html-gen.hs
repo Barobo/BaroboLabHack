@@ -336,14 +336,14 @@ explore = boilerplate
                   ! ngController "StandardEqns" $ do
                 H.div $ do
                     "Input a system of your choice."
-                    standardEquations
+                    exploreStandardEquations
                 H.div !# "chartDisplay" ! ngController "Graph" $ do
                     H.div !. "chartGoesHere" $ mempty
             H.div !# "slopeInterceptForm" !. "tab-pane"
                   ! ngController "InterceptEqns" $ do
                 H.div $ do
                     "Input a system of your choice."
-                    interceptEquations
+                    exploreInterceptEquations
                 H.div !# "chartDisplay" ! ngController "Graph" $ do
                     H.div !. "chartGoesHere" $ mempty
         a ! href "challenge.html"
@@ -360,7 +360,7 @@ explore = boilerplate
     , "css/explore.css"
     ]
   where
-    standardEquations = do
+    exploreStandardEquations = do
         eqnBreakdown "0" "leftEqn" "x1" "y1" "z1"
         eqnBreakdown "1" "rightEqn" "x2" "y2" "z2"
       where
@@ -384,7 +384,7 @@ explore = boilerplate
                                      ++ num (z ++"/"++ y)
                 H.div $ str $ "Slope = " ++ num' ("-" ++ x ++ "/" ++ y)
                 H.div $ str $ "y-intercept = " ++ num' (z ++"/"++ y)
-    interceptEquations = do
+    exploreInterceptEquations = do
         eqnBreakdown "0" "leftEqn" "a1" "b1"
         eqnBreakdown "1" "rightEqn" "a2" "b2"
       where
