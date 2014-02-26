@@ -252,6 +252,8 @@ calculateSetup = boilerplate
                     tdm "\\text y-intercept = -2"
         a ! href "calculate_chart.html"
           !. "next btn btn-large btn-primary" $ "Next"
+        a ! href "prediction.html"
+          !. "back btn btn-large btn-default" $ "Back"
     )
     [ "js/vendor/jqmath-etc-0.4.0.min.js" ]
     [ "css/jqmath-0.4.0.css" ]
@@ -282,6 +284,8 @@ calculateChart = boilerplate
                 H.span !# "intersect" $ "(4,6)"
         a ! href "explore.html"
           !. "next btn btn-large btn-primary" $ "Next"
+        a ! href "calculate_setup.html"
+          !. "back btn btn-large btn-default" $ "Back"
 
     )
     [ "js/vendor/jqmath-etc-0.4.0.min.js"
@@ -344,6 +348,8 @@ explore = boilerplate
                     H.div !. "chartGoesHere" $ mempty
         a ! href "challenge.html"
           !. "next btn btn-large btn-primary" $ "Next"
+        a ! href "calculate_chart.html"
+          !. "back btn btn-large btn-default" $ "Back"
     )
     [ "js/vendor/angular.min.js"
     , "js/vendor/jqmath-etc-0.4.0.min.js"
@@ -426,6 +432,8 @@ challenge = boilerplate
                 H.div $ do
                     interceptEquations
                 chartDisplay
+        a ! href "explore.html"
+          !. "back btn btn-large btn-default" $ "Back"
 
     )
     [ "js/vendor/angular.min.js"
