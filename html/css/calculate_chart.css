@@ -3,8 +3,9 @@
 }
 
 #calculation_chart {
-    height: 600px;
-    width: 600px;
+    height: 340px;
+    width: 340px;
+    margin: auto;
 }
 
 #xlabel, #ylabel, #intersect {
@@ -14,16 +15,16 @@
 }
 
 #ylabel {
-    left: 415px;
-    bottom: 280px;
+    left: 380px;
+    bottom: 130px;
 }
 
 #xlabel {
-    left: 295px;
-    bottom: 460px;
+    left: 320px;
+    bottom: 220px;
 }
 
 #intersect {
-    left: 425px;
-    bottom: 445px;
+    left: 395px;
+    bottom: 210px;
 }
