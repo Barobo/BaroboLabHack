@@ -70,7 +70,7 @@ angular.module('explore', [])
             )
     )
     .controller('InterceptEqns', ($scope) ->
-        $scope.a1 = 0.5
+        $scope.a1 = 1
         $scope.b1 = 4
         $scope.a2 = 2
         $scope.b2 = -2
@@ -84,6 +84,23 @@ angular.module('explore', [])
                 else
                     if $scope.selected[robot] < 1
                         $scope.selected[robot] += 1
+            )
+        $scope.incrementSelected = (robot, up) ->
+            $scope.$apply(->
+                sel = $scope.selected[robot]
+                # Blerg
+                idx = robot + 1
+                coefficient = (
+                    if sel == 0
+                        "a"
+                    else if sel == 1
+                        "b"
+                ) + idx
+
+                if up
+                    $scope[coefficient] += 1
+                else
+                    $scope[coefficient] -= 1
             )
     )
     .controller('Graph', ($scope, $element) ->

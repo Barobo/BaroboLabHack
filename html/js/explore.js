@@ -66,12 +66,12 @@ angular.module('explore', []).filter('plusMinus', function() {
     });
   };
 }).controller('InterceptEqns', function($scope) {
-  $scope.a1 = 0.5;
+  $scope.a1 = 1;
   $scope.b1 = 4;
   $scope.a2 = 2;
   $scope.b2 = -2;
   $scope.selected = [0, 0];
-  return $scope.changeSelected = function(robot, left) {
+  $scope.changeSelected = function(robot, left) {
     return $scope.$apply(function() {
       if (left) {
         if ($scope.selected[robot] > 0) {
@@ -81,6 +81,19 @@ angular.module('explore', []).filter('plusMinus', function() {
         if ($scope.selected[robot] < 1) {
           return $scope.selected[robot] += 1;
         }
+      }
+    });
+  };
+  return $scope.incrementSelected = function(robot, up) {
+    return $scope.$apply(function() {
+      var coefficient, idx, sel;
+      sel = $scope.selected[robot];
+      idx = robot + 1;
+      coefficient = (sel === 0 ? "a" : sel === 1 ? "b" : void 0) + idx;
+      if (up) {
+        return $scope[coefficient] += 1;
+      } else {
+        return $scope[coefficient] -= 1;
       }
     });
   };

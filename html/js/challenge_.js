@@ -105,7 +105,7 @@ angular.module('challenge', []).directive('eqnGraph', function() {
     return _results;
   })(), $scope.a1 = _ref[0], $scope.b1 = _ref[1], $scope.a2 = _ref[2], $scope.b2 = _ref[3];
   $scope.selected = [0, 0];
-  return $scope.changeSelected = function(robot, left) {
+  $scope.changeSelected = function(robot, left) {
     return $scope.$apply(function() {
       if (left) {
         if ($scope.selected[robot] > 0) {
@@ -115,6 +115,19 @@ angular.module('challenge', []).directive('eqnGraph', function() {
         if ($scope.selected[robot] < 1) {
           return $scope.selected[robot] += 1;
         }
+      }
+    });
+  };
+  return $scope.incrementSelected = function(robot, up) {
+    return $scope.$apply(function() {
+      var coefficient, idx, sel;
+      sel = $scope.selected[robot];
+      idx = robot + 1;
+      coefficient = (sel === 0 ? "a" : sel === 1 ? "b" : void 0) + idx;
+      if (up) {
+        return $scope[coefficient] += 1;
+      } else {
+        return $scope[coefficient] -= 1;
       }
     });
   };
