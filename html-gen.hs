@@ -322,6 +322,10 @@ num' expr = "{{" ++ expr ++ "| number | plusMinus:true}}"
 checkboxIf eqn = do
     H.div ! ngShow eqn $ "☑"
     H.div ! ngHide eqn $ "☐"
+breakdownLine hs =
+    H.div $ do
+        H.span !. "glyphicon glyphicon-arrow-right" $ mempty
+        str $ concat hs
 
 explore = boilerplate
     (labNav "Explore")
@@ -459,13 +463,13 @@ challenge = boilerplate
                     control ctlNr num  "1" y "y"
                     "= "
                     control ctlNr num' "2" z ""
-                H.div $ str $ concat
-                    [ "check:" , num' x , "(" , num' "solnX" , ") " , num y
+                breakdownLine
+                    [ num' x , "(" , num' "solnX" , ") " , num y
                     , "(" , num' "solnY" , ") = " , num' z ]
-                H.div $ str $ concat
+                breakdownLine
                     [ (num' $ x ++ " * solnX") , " " , (num $ y ++ " * solnY")
                     , " = " , num' z ]
-                H.div $ str $ concat
+                breakdownLine
                     [ (num' $ x ++ " * solnX + " ++ y ++ " * solnY")
                     , " = " , num' z ]
                 checkboxIf eqn
@@ -489,11 +493,14 @@ challenge = boilerplate
                     "y = "
                     control ctlNr num' "0" a "x"
                     control ctlNr num "1" b ""
-                H.div $ str $ concat
+                breakdownLine
                     [ num' "solnY", " = ", num' a, "(", num' "solnX", ") "
                     , num b ]
-                H.div $ str $
-                    num' "solnY" ++ " = " ++ (num' $ a ++ " * solnX + " ++ b)
+                breakdownLine
+                    [ num' "solnY", " = ", num' (a ++ "* solnX"), " ", num b ]
+                breakdownLine $
+                    (num' "solnY" ++ " = " ++ (num' $ a ++ " * solnX + " ++ b))
+                    : []
                 checkboxIf $ val $ "solnY == " ++ a ++ " * solnX + " ++ b
 
 main = mapM_ genHtml [
