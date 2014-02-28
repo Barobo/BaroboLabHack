@@ -203,17 +203,6 @@ div.equations {
     top: 4em;
 }
 
-a.next {
-    position: absolute;
-    right: 0;
-    top:  18em;
-}
-
-a.back {
-    position: absolute;
-    top: 18em;
-}
-
 .equations table {
     text-align: right;
     border-spacing: 3em;

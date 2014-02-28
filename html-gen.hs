@@ -347,7 +347,7 @@ explore = boilerplate
                 H.div !# "chartDisplay" ! ngController "Graph" $ do
                     H.div !. "chartGoesHere" $ mempty
         a ! href "challenge.html"
-          !. "next btn btn-large btn-primary" $ "Next"
+          !. "next pull-right btn btn-large btn-primary" $ "Next"
         a ! href "calculate_chart.html"
           !. "back btn btn-large btn-default" $ "Back"
     )
