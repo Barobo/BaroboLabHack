@@ -385,11 +385,12 @@ explore = boilerplate
                 H.div $ str $ "Slope = " ++ num' ("-" ++ x ++ "/" ++ y)
                 H.div $ str $ "y-intercept = " ++ num' (z ++"/"++ y)
     exploreInterceptEquations = do
-        eqnBreakdown "0" "leftEqn" "a1" "b1"
-        eqnBreakdown "1" "rightEqn" "a2" "b2"
+        H.div !. "container-fluid" $ H.div !. "row" $ do
+            eqnBreakdown "0" "leftEqn" "a1" "b1"
+            eqnBreakdown "1" "rightEqn" "a2" "b2"
       where
         eqnBreakdown ctlNr id_ a b =
-            H.div !. "eqn-control" !# id_ $ do
+            H.div !. "eqn-control col-xs-6" !# id_ $ do
                 H.div ! ngHide "!mockRobot" $ do
                     "y = "
                     numInput a
@@ -413,7 +414,7 @@ challenge = boilerplate
         H.div !. "tab-content" $ do
             H.div !# "standardForm" !. "tab-pane active"
                   ! ngController "StandardEqns" $ do
-                H.div $ do
+                H.div !. "container-fluid" $ do
                     standardEquations
                 chartDisplay
             H.div !# "slopeInterceptForm" !. "tab-pane"
@@ -430,7 +431,7 @@ challenge = boilerplate
     , "js/flot/jquery.flot.js"
     , "js/challenge_.js"
     ]
-    []
+    ["css/explore.css"]
   where
     chartDisplay = do
         H.div !# "chartDisplay" ! ngController "Graph" $ do
@@ -441,11 +442,12 @@ challenge = boilerplate
     standardEquations = do
         H.div $ str $ concat
             [ "Is (" , num' "solnX" , ", " , num' "solnY" , ") a solution?" ]
-        eqnBreakdown "0" "leftEqn" "x1" "y1" "z1"
-        eqnBreakdown "1" "rightEqn" "x2" "y2" "z2"
+        H.div !. "row" $ do
+            eqnBreakdown "0" "leftEqn" "x1" "y1" "z1"
+            eqnBreakdown "1" "rightEqn" "x2" "y2" "z2"
       where
         eqnBreakdown ctlNr id_ x y z =
-            H.div !. "eqn-control" !# id_ $ do
+            H.div !. "eqn-control col-xs-6" !# id_ $ do
                 H.div ! ngHide "!mockRobot" $ do
                     numInput x
                     "x + "
@@ -472,11 +474,12 @@ challenge = boilerplate
     interceptEquations = do
         H.div $ str $ concat
             [ "Is (" , num' "solnX" , ", " , num' "solnY" , ") a solution?" ]
-        eqnBreakdown "0" "leftEqn" "a1" "b1"
-        eqnBreakdown "1" "rightEqn" "a2" "b2"
+        H.div !. "row" $ do
+            eqnBreakdown "0" "leftEqn" "a1" "b1"
+            eqnBreakdown "1" "rightEqn" "a2" "b2"
       where
         eqnBreakdown ctlNr id_ a b =
-            H.div !. "eqn-control" !# id_ $ do
+            H.div !. "eqn-control col-xs-6" !# id_ $ do
                 H.div ! ngHide "!mockRobot" $ do
                     "y = "
                     numInput a
