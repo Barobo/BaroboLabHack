@@ -100,13 +100,21 @@ holt = boilerplate'
     [ li ! class_ "active" $ a ! href "holt.html" $ img ! src "img/holt_california.png"
     ]
     (ol ! class_ "nav nav-stacked nav-pills" $ do
-        li ! class_ "disabled" $ a ! href "#" $ "Chapter 1"
-        li ! class_ "disabled" $ a ! href "#" $ "Chapter 2"
-        li ! class_ "disabled" $ a ! href "#" $ "Chapter 3"
-        li ! class_ "disabled" $ a ! href "#" $ "Chapter 4"
-        li ! class_ "disabled" $ a ! href "#" $ "Chapter 5"
+        disabled "Chapter 1"
+        disabled "Chapter 2"
+        disabled "Chapter 3"
+        disabled "Chapter 4"
+        disabled "Chapter 5"
         li $ a ! href "chap6.html" $ "Chapter 6"
+        disabled "Chapter 7"
+        disabled "Chapter 8"
+        disabled "Chapter 9"
+        disabled "Chapter 10"
+        disabled "Chapter 11"
+        disabled "Chapter 12"
     )
+  where
+    disabled = (li !. "disabled") . (a ! href "#")
 
 chap6 = boilerplate'
     [ li $ a ! href "holt.html" $ img ! src "img/holt_california.png"
