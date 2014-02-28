@@ -92,7 +92,7 @@
                                         y = 
                                         <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="z1">
                                     </div>
-                                    <div>
+                                    <div class="leftEqn">
                                         <span ng-class="{activeControl: selected[0] == 0}">
                                             {{x1| number | plusMinus:true}}x
                                         </span>
@@ -125,7 +125,7 @@
                                         y = 
                                         <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="z2">
                                     </div>
-                                    <div>
+                                    <div class="rightEqn">
                                         <span ng-class="{activeControl: selected[1] == 0}">
                                             {{x2| number | plusMinus:true}}x
                                         </span>
@@ -170,7 +170,7 @@
                                         x + 
                                         <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="b1">
                                     </div>
-                                    <div>
+                                    <div class="leftEqn">
                                         y = 
                                         <span ng-class="{activeControl: selected[0] == 0}">
                                             {{a1| number | plusMinus:true}}x
@@ -193,7 +193,7 @@
                                         x + 
                                         <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="b2">
                                     </div>
-                                    <div>
+                                    <div class="rightEqn">
                                         y = 
                                         <span ng-class="{activeControl: selected[1] == 0}">
                                             {{a2| number | plusMinus:true}}x

@@ -10,3 +10,10 @@
 .eqnCheckboxYes {
     color: green;
 }
+
+.leftEqn {
+    color: red;
+}
+.rightEqn {
+    color: blue;
+}

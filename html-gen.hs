@@ -381,7 +381,7 @@ explore = boilerplate
                     numInput y
                     "y = "
                     numInput z
-                H.div $ do
+                H.div !. id_ $ do
                     control ctlNr num' "0" x "x"
                     control ctlNr num "1" y "y"
                     "="
@@ -404,7 +404,7 @@ explore = boilerplate
                     numInput a
                     "x + "
                     numInput b
-                H.div $ do
+                H.div !. id_ $ do
                     "y = "
                     control ctlNr num' "0" a "x"
                     control ctlNr num "1" b ""
@@ -462,7 +462,7 @@ challenge = boilerplate
                     numInput y
                     "y = "
                     numInput z
-                H.div $ do
+                H.div !. id_ $ do
                     control ctlNr num' "0" x "x"
                     control ctlNr num  "1" y "y"
                     "= "
@@ -493,7 +493,7 @@ challenge = boilerplate
                     numInput a
                     "x + "
                     numInput b
-                H.div $ do
+                H.div !. id_ $ do
                     "y = "
                     control ctlNr num' "0" a "x"
                     control ctlNr num "1" b ""
