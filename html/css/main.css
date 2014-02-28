@@ -206,8 +206,13 @@ div.equations {
 
 a.next {
     position: absolute;
-    left: 25em;
+    right: 0;
     top:  20em;
+}
+
+a.back {
+    position: absolute;
+    top: 20em;
 }
 
 .equations table {
