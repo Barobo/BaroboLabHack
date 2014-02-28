@@ -259,9 +259,9 @@ calculateSetup = boilerplate
                     tdm "\\text y-intercept = 4"
                     tdm "\\text y-intercept = -2"
         a ! href "calculate_chart.html"
-          !. "next btn btn-large btn-primary" $ "Next"
-        a ! href "prediction.html"
-          !. "back btn btn-large btn-default" $ "Back"
+          !. "pull-right btn btn-large btn-primary" $ "Next"
+        a ! href "charts.html"
+          !. "btn btn-large btn-default" $ "Back"
     )
     [ "js/vendor/jqmath-etc-0.4.0.min.js" ]
     [ "css/jqmath-0.4.0.css" ]
@@ -275,11 +275,11 @@ calculateChart = boilerplate
             H.div !. "eqnTable" $ do
                 table !. "equations" $ do
                     tr $ do
+                        td "Robber:"
                         tdm "y = 1/2x + 4"
-                        td "Robber"
                     tr $ do
+                        td "Cop:"
                         tdm "y = 2x - 2"
-                        td "Cop"
 
             H.div $ str $ "The solution of the system of linear equations"
                 ++ " is the ordered pair $(4,6)$."
@@ -291,9 +291,9 @@ calculateChart = boilerplate
                 H.span !# "ylabel" $ "4"
                 H.span !# "intersect" $ "(4,6)"
         a ! href "explore.html"
-          !. "next btn btn-large btn-primary" $ "Next"
+          !. "pull-right btn btn-large btn-primary" $ "Next"
         a ! href "calculate_setup.html"
-          !. "back btn btn-large btn-default" $ "Back"
+          !. "btn btn-large btn-default" $ "Back"
 
     )
     [ "js/vendor/jqmath-etc-0.4.0.min.js"

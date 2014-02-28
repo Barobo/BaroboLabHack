@@ -5,7 +5,6 @@
 #calculation_chart {
     height: 340px;
     width: 340px;
-    margin: auto;
 }
 
 #xlabel, #ylabel, #intersect {
@@ -15,16 +14,20 @@
 }
 
 #ylabel {
-    left: 380px;
-    bottom: 130px;
+    left: 235px;
+    bottom: 150px;
 }
 
 #xlabel {
-    left: 320px;
-    bottom: 220px;
+    left: 165px;
+    bottom: 250px;
 }
 
 #intersect {
-    left: 395px;
-    bottom: 210px;
+    left: 245px;
+    bottom: 235px;
+}
+
+.eqnTable {
+    text-align: right;
 }
