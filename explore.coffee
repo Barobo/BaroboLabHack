@@ -8,12 +8,9 @@ angular.module('explore', [])
                 if unary or x == 0
                     x
                 else
-                    "+ #{x_}"
+                    "+#{x_}"
             else # < 0
-                if unary
-                    "-#{x_}"
-                else
-                    "- #{x_}"
+                "-#{x_}"
     )
     .controller('Explore', ($scope) ->
         $scope.mockRobot = Robot.mock? && Robot.mock

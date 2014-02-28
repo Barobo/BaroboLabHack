@@ -200,19 +200,18 @@ ul.sections small {
 
 div.equations {
     position: relative;
-    top: 5em;
-    left: 5em;
+    top: 4em;
 }
 
 a.next {
     position: absolute;
     right: 0;
-    top:  20em;
+    top:  18em;
 }
 
 a.back {
     position: absolute;
-    top: 20em;
+    top: 18em;
 }
 
 .equations table {

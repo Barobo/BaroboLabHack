@@ -82,72 +82,74 @@
                 <div id="standardForm" class="tab-pane active" ng-controller="StandardEqns">
                     <div>
                         Input a system of your choice.
-                        <div class="eqn-control" id="leftEqn">
-                            <div ng-hide="!mockRobot">
-                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="x1">
-                                x + 
-                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="y1">
-                                y = 
-                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="z1">
-                            </div>
-                            <div>
-                                <span ng-class="{activeControl: selected[0] == 0}">
-                                    {{x1| number | plusMinus:true}}
-                                </span>
-                                x 
-                                <span ng-class="{activeControl: selected[0] == 1}">
-                                    {{y1| number | plusMinus}}
-                                </span>
-                                y = 
-                                <span ng-class="{activeControl: selected[0] == 2}">
-                                    {{z1| number | plusMinus:true}}
-                                </span>
-                            </div>
-                            <div>
-                                {{y1| number | plusMinus:true}}y = {{-x1| number | plusMinus:true}}x {{z1| number | plusMinus}}
-                            </div>
-                            <div>
-                                y = {{-x1/y1| number | plusMinus:true}}x {{z1/y1| number | plusMinus}}
-                            </div>
-                            <div>
-                                Slope = {{-x1/y1| number | plusMinus:true}}
-                            </div>
-                            <div>
-                                y-intercept = {{z1/y1| number | plusMinus:true}}
-                            </div>
-                        </div>
-                        <div class="eqn-control" id="rightEqn">
-                            <div ng-hide="!mockRobot">
-                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="x2">
-                                x + 
-                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="y2">
-                                y = 
-                                <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="z2">
-                            </div>
-                            <div>
-                                <span ng-class="{activeControl: selected[1] == 0}">
-                                    {{x2| number | plusMinus:true}}
-                                </span>
-                                x 
-                                <span ng-class="{activeControl: selected[1] == 1}">
-                                    {{y2| number | plusMinus}}
-                                </span>
-                                y = 
-                                <span ng-class="{activeControl: selected[1] == 2}">
-                                    {{z2| number | plusMinus:true}}
-                                </span>
-                            </div>
-                            <div>
-                                {{y2| number | plusMinus:true}}y = {{-x2| number | plusMinus:true}}x {{z2| number | plusMinus}}
-                            </div>
-                            <div>
-                                y = {{-x2/y2| number | plusMinus:true}}x {{z2/y2| number | plusMinus}}
-                            </div>
-                            <div>
-                                Slope = {{-x2/y2| number | plusMinus:true}}
-                            </div>
-                            <div>
-                                y-intercept = {{z2/y2| number | plusMinus:true}}
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="eqn-control col-xs-6" id="leftEqn">
+                                    <div ng-hide="!mockRobot">
+                                        <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="x1">
+                                        x + 
+                                        <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="y1">
+                                        y = 
+                                        <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="z1">
+                                    </div>
+                                    <div>
+                                        <span ng-class="{activeControl: selected[0] == 0}">
+                                            {{x1| number | plusMinus:true}}x
+                                        </span>
+                                        <span ng-class="{activeControl: selected[0] == 1}">
+                                            {{y1| number | plusMinus}}y
+                                        </span>
+                                        =
+                                        <span ng-class="{activeControl: selected[0] == 2}">
+                                            {{z1| number | plusMinus:true}}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        {{y1| number | plusMinus:true}}y = {{-x1| number | plusMinus:true}}x {{z1| number | plusMinus}}
+                                    </div>
+                                    <div>
+                                        y = {{-x1/y1| number | plusMinus:true}}x {{z1/y1| number | plusMinus}}
+                                    </div>
+                                    <div>
+                                        Slope = {{-x1/y1| number | plusMinus:true}}
+                                    </div>
+                                    <div>
+                                        y-intercept = {{z1/y1| number | plusMinus:true}}
+                                    </div>
+                                </div>
+                                <div class="eqn-control col-xs-6" id="rightEqn">
+                                    <div ng-hide="!mockRobot">
+                                        <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="x2">
+                                        x + 
+                                        <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="y2">
+                                        y = 
+                                        <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="z2">
+                                    </div>
+                                    <div>
+                                        <span ng-class="{activeControl: selected[1] == 0}">
+                                            {{x2| number | plusMinus:true}}x
+                                        </span>
+                                        <span ng-class="{activeControl: selected[1] == 1}">
+                                            {{y2| number | plusMinus}}y
+                                        </span>
+                                        =
+                                        <span ng-class="{activeControl: selected[1] == 2}">
+                                            {{z2| number | plusMinus:true}}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        {{y2| number | plusMinus:true}}y = {{-x2| number | plusMinus:true}}x {{z2| number | plusMinus}}
+                                    </div>
+                                    <div>
+                                        y = {{-x2/y2| number | plusMinus:true}}x {{z2/y2| number | plusMinus}}
+                                    </div>
+                                    <div>
+                                        Slope = {{-x2/y2| number | plusMinus:true}}
+                                    </div>
+                                    <div>
+                                        y-intercept = {{z2/y2| number | plusMinus:true}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -169,9 +171,8 @@
                             <div>
                                 y = 
                                 <span ng-class="{activeControl: selected[0] == 0}">
-                                    {{a1| number | plusMinus:true}}
+                                    {{a1| number | plusMinus:true}}x
                                 </span>
-                                x 
                                 <span ng-class="{activeControl: selected[0] == 1}">
                                     {{b1| number | plusMinus}}
                                 </span>
@@ -193,9 +194,8 @@
                             <div>
                                 y = 
                                 <span ng-class="{activeControl: selected[1] == 0}">
-                                    {{a2| number | plusMinus:true}}
+                                    {{a2| number | plusMinus:true}}x
                                 </span>
-                                x 
                                 <span ng-class="{activeControl: selected[1] == 1}">
                                     {{b2| number | plusMinus}}
                                 </span>

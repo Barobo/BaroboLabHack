@@ -14,14 +14,10 @@ angular.module('explore', []).filter('plusMinus', function() {
       if (unary || x === 0) {
         return x;
       } else {
-        return "+ " + x_;
+        return "+" + x_;
       }
     } else {
-      if (unary) {
-        return "-" + x_;
-      } else {
-        return "- " + x_;
-      }
+      return "-" + x_;
     }
   };
 }).controller('Explore', function($scope) {

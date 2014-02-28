@@ -309,10 +309,10 @@ control0 = control "0" num
 control1 = control "1" num
 control0' = control "0" num'
 control1' = control "1" num'
-control rob numFunc n v =
+control rob numFunc coeff jsVal variable =
     H.span
-        ! activeControlClass rob n
-        $ str $ numFunc v
+        ! activeControlClass rob coeff
+        $ str $ (numFunc jsVal) ++ variable
 activeControlClass rob n =
     ngClass $ val
             $ "{activeControl: selected["
@@ -361,11 +361,12 @@ explore = boilerplate
     ]
   where
     exploreStandardEquations = do
-        eqnBreakdown "0" "leftEqn" "x1" "y1" "z1"
-        eqnBreakdown "1" "rightEqn" "x2" "y2" "z2"
+        H.div !. "container-fluid" $ H.div !. "row" $ do
+            eqnBreakdown "0" "leftEqn" "x1" "y1" "z1"
+            eqnBreakdown "1" "rightEqn" "x2" "y2" "z2"
       where
         eqnBreakdown ctlNr id_ x y z =
-            H.div !. "eqn-control" !# id_ $ do
+            H.div !. "eqn-control col-xs-6" !# id_ $ do
                 H.div ! ngHide "!mockRobot" $ do
                     numInput x
                     "x + "
@@ -373,11 +374,10 @@ explore = boilerplate
                     "y = "
                     numInput z
                 H.div $ do
-                    control ctlNr num' "0" x
-                    "x "
-                    control ctlNr num "1" y
-                    "y = "
-                    control ctlNr num' "2" z
+                    control ctlNr num' "0" x "x"
+                    control ctlNr num "1" y "y"
+                    "="
+                    control ctlNr num' "2" z ""
                 H.div $ str $ num' y ++ "y = " ++ num' ("-" ++ x) ++ "x "
                                      ++ num z
                 H.div $ str $ "y = " ++ num' ("-" ++ x ++ "/" ++ y) ++ "x "
@@ -397,9 +397,8 @@ explore = boilerplate
                     numInput b
                 H.div $ do
                     "y = "
-                    control ctlNr num' "0" a
-                    "x "
-                    control ctlNr num "1" b
+                    control ctlNr num' "0" a "x"
+                    control ctlNr num "1" b ""
                 H.div $ str $ "Slope = " ++ num' a
                 H.div $ str $ "y-intercept = " ++ num' b
 
@@ -454,11 +453,10 @@ challenge = boilerplate
                     "y = "
                     numInput z
                 H.div $ do
-                    control ctlNr num' "0" x
-                    "x "
-                    control ctlNr num  "1" y
-                    "y = "
-                    control ctlNr num' "2" z
+                    control ctlNr num' "0" x "x"
+                    control ctlNr num  "1" y "y"
+                    "= "
+                    control ctlNr num' "2" z ""
                 H.div $ str $ concat
                     [ "check:" , num' x , "(" , num' "solnX" , ") " , num y
                     , "(" , num' "solnY" , ") = " , num' z ]
@@ -486,9 +484,8 @@ challenge = boilerplate
                     numInput b
                 H.div $ do
                     "y = "
-                    control ctlNr num' "0" a
-                    "x "
-                    control ctlNr num "1" b
+                    control ctlNr num' "0" a "x"
+                    control ctlNr num "1" b ""
                 H.div $ str $ concat
                     [ num' "solnY", " = ", num' a, "(", num' "solnX", ") "
                     , num b ]
