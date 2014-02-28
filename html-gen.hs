@@ -320,8 +320,12 @@ activeControlClass rob n =
 num expr = "{{" ++ expr ++ "| number | plusMinus}}"
 num' expr = "{{" ++ expr ++ "| number | plusMinus:true}}"
 checkboxIf eqn = do
-    H.div ! ngShow eqn $ "☑"
-    H.div ! ngHide eqn $ "☐"
+    H.div !. "eqnCheckboxYes" ! ngShow eqn $ do
+        H.span !. "eqnCheckbox" $ "☑"
+        "Yes!"
+    H.div ! ngHide eqn $ do
+        H.span !. "eqnCheckbox" $ "☐"
+        "Not yet..."
 breakdownLine hs =
     H.div $ do
         H.span !. "glyphicon glyphicon-arrow-right" $ mempty

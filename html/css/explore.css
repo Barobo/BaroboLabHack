@@ -2,3 +2,11 @@
     font-weight: bold;
     font-size: 2em;
 }
+
+.eqnCheckbox {
+    font-size: 3em;
+}
+
+.eqnCheckboxYes {
+    color: green;
+}

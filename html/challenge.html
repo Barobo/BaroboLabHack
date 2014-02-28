@@ -119,11 +119,17 @@
                                     </span>
                                     {{x1 * solnX + y1 * solnY| number | plusMinus:true}} = {{z1| number | plusMinus:true}}
                                 </div>
-                                <div ng-show="x1 * solnX + y1 * solnY == z1">
-                                    ☑
+                                <div class="eqnCheckboxYes" ng-show="x1 * solnX + y1 * solnY == z1">
+                                    <span class="eqnCheckbox">
+                                        ☑
+                                    </span>
+                                    Yes!
                                 </div>
                                 <div ng-hide="x1 * solnX + y1 * solnY == z1">
-                                    ☐
+                                    <span class="eqnCheckbox">
+                                        ☐
+                                    </span>
+                                    Not yet...
                                 </div>
                             </div>
                             <div class="eqn-control col-xs-6" id="rightEqn">
@@ -161,11 +167,17 @@
                                     </span>
                                     {{x2 * solnX + y2 * solnY| number | plusMinus:true}} = {{z2| number | plusMinus:true}}
                                 </div>
-                                <div ng-show="x2 * solnX + y2 * solnY == z2">
-                                    ☑
+                                <div class="eqnCheckboxYes" ng-show="x2 * solnX + y2 * solnY == z2">
+                                    <span class="eqnCheckbox">
+                                        ☑
+                                    </span>
+                                    Yes!
                                 </div>
                                 <div ng-hide="x2 * solnX + y2 * solnY == z2">
-                                    ☐
+                                    <span class="eqnCheckbox">
+                                        ☐
+                                    </span>
+                                    Not yet...
                                 </div>
                             </div>
                         </div>
@@ -212,11 +224,17 @@
                                     </span>
                                     {{solnY| number | plusMinus:true}} = {{a1 * solnX + b1| number | plusMinus:true}}
                                 </div>
-                                <div ng-show="solnY == a1 * solnX + b1">
-                                    ☑
+                                <div class="eqnCheckboxYes" ng-show="solnY == a1 * solnX + b1">
+                                    <span class="eqnCheckbox">
+                                        ☑
+                                    </span>
+                                    Yes!
                                 </div>
                                 <div ng-hide="solnY == a1 * solnX + b1">
-                                    ☐
+                                    <span class="eqnCheckbox">
+                                        ☐
+                                    </span>
+                                    Not yet...
                                 </div>
                             </div>
                             <div class="eqn-control col-xs-6" id="rightEqn">
@@ -250,11 +268,17 @@
                                     </span>
                                     {{solnY| number | plusMinus:true}} = {{a2 * solnX + b2| number | plusMinus:true}}
                                 </div>
-                                <div ng-show="solnY == a2 * solnX + b2">
-                                    ☑
+                                <div class="eqnCheckboxYes" ng-show="solnY == a2 * solnX + b2">
+                                    <span class="eqnCheckbox">
+                                        ☑
+                                    </span>
+                                    Yes!
                                 </div>
                                 <div ng-hide="solnY == a2 * solnX + b2">
-                                    ☐
+                                    <span class="eqnCheckbox">
+                                        ☐
+                                    </span>
+                                    Not yet...
                                 </div>
                             </div>
                         </div>
