@@ -177,8 +177,8 @@ void MainWindow::highlightAllLinks()
     // We append '; undefined' after the jQuery call here to prevent a possible recursion loop and crash caused by
     // the way the elements returned by the each iterator elements reference each other, which causes problems upon
     // converting them to QVariants.
-    QString code = "qt.jQuery('a').each( function () { qt.jQuery(this).css('background-color', 'yellow') } ); undefined";
-    view->page()->mainFrame()->evaluateJavaScript(code);
+    //QString code = "qt.jQuery('a').each( function () { qt.jQuery(this).css('background-color', 'yellow') } ); undefined";
+    //view->page()->mainFrame()->evaluateJavaScript(code);
 }
 //! [7]
 
@@ -190,37 +190,47 @@ void MainWindow::rotateImages(bool invert)
     // We append '; undefined' after each of the jQuery calls here to prevent a possible recursion loop and crash caused by
     // the way the elements returned by the each iterator elements reference each other, which causes problems upon
     // converting them to QVariants.
+#if 0
     if (invert)
         code = "qt.jQuery('img').each( function () { qt.jQuery(this).css('-webkit-transition', '-webkit-transform 2s'); qt.jQuery(this).css('-webkit-transform', 'rotate(180deg)') } ); undefined";
     else
         code = "qt.jQuery('img').each( function () { qt.jQuery(this).css('-webkit-transition', '-webkit-transform 2s'); qt.jQuery(this).css('-webkit-transform', 'rotate(0deg)') } ); undefined";
     view->page()->mainFrame()->evaluateJavaScript(code);
+#endif
 }
 //! [8]
 
 //! [9]
 void MainWindow::removeGifImages()
 {
+#if 0
     QString code = "qt.jQuery('[src*=gif]').remove()";
     view->page()->mainFrame()->evaluateJavaScript(code);
+#endif
 }
 
 void MainWindow::removeInlineFrames()
 {
+#if 0
     QString code = "qt.jQuery('iframe').remove()";
     view->page()->mainFrame()->evaluateJavaScript(code);
+#endif
 }
 
 void MainWindow::removeObjectElements()
 {
+#if 0
     QString code = "qt.jQuery('object').remove()";
     view->page()->mainFrame()->evaluateJavaScript(code);
+#endif
 }
 
 void MainWindow::removeEmbeddedElements()
 {
+#if 0
     QString code = "qt.jQuery('embed').remove()";
     view->page()->mainFrame()->evaluateJavaScript(code);
+#endif
 }
 //! [9]
 
