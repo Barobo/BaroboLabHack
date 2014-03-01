@@ -3,7 +3,7 @@
 
 cmake_minimum_required(VERSION 2.8.9)
 cmake_policy(VERSION 2.8.9)
-cmake_policy(SET CMP0020 OLD) # we'll link with QTMAIN manually
+#cmake_policy(SET CMP0020 OLD) # we'll link with QTMAIN manually
 
 project(BaroboLab)
 

@@ -36,8 +36,16 @@ bool JsInterface::connectRobot (const QString& address) {
     return m_mainWindow->connectRobot(address);
 }
 
+bool JsInterface::connectRobot_noCB (const QString& address) {
+    return m_mainWindow->connectRobot_noCB(address);
+}
+
 void JsInterface::disconnectRobot (const QString& address) {
   m_mainWindow->disconnectRobot(address);
+}
+
+void JsInterface::disconnectRobot_noCB (const QString& address) {
+  m_mainWindow->disconnectRobot_noCB(address);
 }
 
 int JsInterface::move (const QString& address, double angle1, double angle2, double angle3, double angle4) {

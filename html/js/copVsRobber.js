@@ -24,8 +24,8 @@ var Robot;
 if (typeof window.Robot === "undefined") {
   Robot = {};
   [
-    "connectRobot",
-    "disconnectRobot",
+    "connectRobot_noCB",
+    "disconnectRobot_noCB",
     "getRobotIDList",
     "moveNB",
     "printMessage",
@@ -46,8 +46,8 @@ else {
 var
   /* Constants */
   wheelRadius = 1.75,
-  blue = "4PMN",
-  red = "X769",
+  blue = "PJHF",
+  red = "3TCZ",
   imgH = 30, imgW = 40,
   ymin = -2, ymax = 12,
 
@@ -128,8 +128,8 @@ var
 
   nighttime = function () {
     stopRobots();
-    Robot.disconnectRobot(red);
-    Robot.disconnectRobot(blue);
+    Robot.disconnectRobot_noCB(red);
+    Robot.disconnectRobot_noCB(blue);
   },
 
   plotCharts = function (xvsts, poss) {
@@ -296,8 +296,8 @@ var
 
   runRobots = function (dist) {
     //var robotList = Robot.getRobotIDList();
-    Robot.connectRobot(red);
-    Robot.connectRobot(blue);
+    Robot.connectRobot_noCB(red);
+    Robot.connectRobot_noCB(blue);
 
     Robot.setColorRGB(red, 255, 0, 0);
     Robot.setColorRGB(blue, 0, 0, 255);

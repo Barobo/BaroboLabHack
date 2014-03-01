@@ -48,7 +48,7 @@ int main(int argc, char * argv[])
 {
     QApplication app(argc, argv);
     QUrl url;
-    QString urlstring("file://");
+    QString urlstring("file:///");
     urlstring.append(qApp->applicationDirPath());
     urlstring.append("/html/index.html");
     qDebug() << "Opening html file:" << urlstring;

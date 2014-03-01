@@ -23,9 +23,13 @@ void RobotListener::startWork()
 
 void RobotListener::stopWork()
 {
-  m_timer->stop();
+  QMetaObject::invokeMethod(m_timer, "stop", Qt::QueuedConnection);
+  //m_timer->stop();
 }
 
+#ifndef M_PI
+#define M_PI 3.14159
+#endif
 void RobotListener::doWork()
 {
   double curJoint2Angle;
@@ -62,5 +66,4 @@ void RobotListener::doWork()
     curJoint1Angle = a[0];
     emit scrollDown(m_addr);
   }
-  QThread::yieldCurrentThread();
 }

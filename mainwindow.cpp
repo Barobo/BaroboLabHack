@@ -53,12 +53,6 @@ MainWindow::MainWindow(const QUrl& url) : m_dongle(new mobot_t)
 {
     progress = 0;
 
-    QFile file;
-    file.setFileName(":/jquery.min.js");
-    file.open(QIODevice::ReadOnly);
-    jQuery = file.readAll();
-    jQuery.append("\nvar qt = { 'jQuery': jQuery.noConflict(true) };");
-    file.close();
 //! [1]
 
     QNetworkProxyFactory::setUseSystemConfiguration(true);
@@ -289,6 +283,8 @@ bool MainWindow::connectRobot (const QString& address) {
 
   /* extract the 8-bit byte array from QString, from which we can then extract
    * the C-string */
+  //qDebug() << "Connecting to address: '" << address << "'";
+  printf("%s\n", address.data());
   auto baAddress = address.toLocal8Bit();
 
   if (-1 == Mobot_connectWithAddress(newrobot, baAddress.data(), 1)) {
@@ -298,8 +294,8 @@ bool MainWindow::connectRobot (const QString& address) {
   }
   Mobot_enableButtonCallback(newrobot, strdup(baAddress.data()), JsInterface::robotButtonCallback);
   auto l = new RobotListener(newrobot, address);
-  QObject::connect(l, SIGNAL(scrollUp(QString)), m_interface, SLOT(scrollUpSlot(QString)));
-  QObject::connect(l, SIGNAL(scrollDown(QString)), m_interface, SLOT(scrollDownSlot(QString)));
+  QObject::connect(l, SIGNAL(scrollUp(QString)), m_interface, SLOT(scrollUpSlot(QString)), Qt::QueuedConnection);
+  QObject::connect(l, SIGNAL(scrollDown(QString)), m_interface, SLOT(scrollDownSlot(QString)), Qt::QueuedConnection);
   QThread *thread = new QThread(this);
   l->moveToThread(thread);
   thread->start();
@@ -309,13 +305,48 @@ bool MainWindow::connectRobot (const QString& address) {
   return true;
 }
 
+bool MainWindow::connectRobot_noCB (const QString& address) {
+  if (m_connectedRobots.end() != m_connectedRobots.find(address)) {
+    /* The requested robot is already connected */
+    return true;
+  }
+
+  auto newrobot = new mobot_t;
+  Mobot_init(newrobot);
+
+  /* extract the 8-bit byte array from QString, from which we can then extract
+   * the C-string */
+  //qDebug() << "Connecting to address: '" << address << "'";
+  printf("%s\n", address.data());
+  auto baAddress = address.toLocal8Bit();
+
+  if (-1 == Mobot_connectWithAddress(newrobot, baAddress.data(), 1)) {
+    delete newrobot;
+    qDebug() << "(barobolab) ERROR: Mobot_connectWithTTY failed\n";
+    return false;
+  }
+  m_connectedRobots.insert(std::make_pair(address, newrobot));
+  return true;
+}
+
 void MainWindow::disconnectRobot (const QString& address) {
   auto it2 = m_robotListeners.find(address);
   if (m_robotListeners.end() != it2) {
-    delete it2->second;
-    m_robotListeners.erase(it2);
+    it2->second->stopWork();
+    //delete it2->second;
+    //m_robotListeners.erase(it2);
   }
 
+  auto it = m_connectedRobots.find(address);
+  if (m_connectedRobots.end() == it) {
+    return;
+  }
+  Mobot_disconnect(it->second);
+  delete it->second;
+  m_connectedRobots.erase(it);
+}
+
+void MainWindow::disconnectRobot_noCB (const QString& address) {
   auto it = m_connectedRobots.find(address);
   if (m_connectedRobots.end() == it) {
     return;

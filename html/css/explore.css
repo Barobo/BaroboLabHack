@@ -3,6 +3,17 @@
     font-size: 2em;
 }
 
-.eqn-control span {
-    margin-right: -0.25em;
+.eqnCheckbox {
+    font-size: 3em;
+}
+
+.eqnCheckboxYes {
+    color: green;
+}
+
+.leftEqn {
+    color: red;
+}
+.rightEqn {
+    color: blue;
 }

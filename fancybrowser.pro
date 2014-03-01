@@ -8,10 +8,9 @@ SOURCES =   main.cpp \
             robotlistener.cpp
 RESOURCES = jquery.qrc
 
-INCLUDEPATH += libbarobo
+INCLUDEPATH += ../libbarobo/include
 
-LIBS += -Llibbarobo/build -Llibbarobo/build/BaroboConfigFile -Llibbarobo/build/BaroboConfigFile/mxml-2.7 \
-    -lbaroboStatic -lbaroboconfigfile -lmxml 
+LIBS += -Lbuild -lbarobo
 
 QMAKE_CXXFLAGS += -std=c++11
 CONFIG += c++11

@@ -59,7 +59,9 @@ public:
 
     QString getRobotIDList ();
     bool connectRobot (const QString& address);
+    bool connectRobot_noCB (const QString& address);
     void disconnectRobot (const QString& address);
+    void disconnectRobot_noCB (const QString& address);
     int move (const QString& address, double angle1, double angle2, double angle3, double angle4);
     int moveNB (const QString& address, double angle1, double angle2, double angle3, double angle4);
     int moveTo (const QString& address, double angle1, double angle2, double angle3, double angle4);
