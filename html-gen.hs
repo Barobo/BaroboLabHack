@@ -28,7 +28,8 @@ ngShow = customAttribute "ng-show"
 
 boilerplate navlist content scripts styles =
   let scripts' = mapM_ (\s -> script ! src s $ mempty) $ [
-                    "js/vendor/jquery-1.10.2.min.js"
+                    "js/robot_ids.js"
+                    , "js/vendor/jquery-1.10.2.min.js"
                     , "js/vendor/bootstrap.min.js" ] ++ scripts
       styles' = mapM_ (\s -> link ! rel "stylesheet" ! href s) $ [
                     "css/bootstrap.min.css"

@@ -1,7 +1,7 @@
 # This is disgusting, but I literally copied and pasted explore.coffee in
 # here. Hack demo. I pray I never see this code after next week.
 
-robots = ['8KV7', '6C19']
+robots = [redRobot, blueRobot]
 
 rand = (min, max) ->
     Math.floor(Math.random() * (max - min) + min)
@@ -224,12 +224,6 @@ $(->
     Robot.setColorRGB(robots[0], 255, 0, 0)
     Robot.setColorRGB(robots[1], 0, 0, 255)
 )
-
-window.onbeforeunload = ->
-    Robot.setColorRGB(robots[0], 0, 255, 0)
-    Robot.setColorRGB(robots[1], 0, 255, 0)
-    Robot.disconnectRobot(x) for x in robots
-    null
 
 Robot.buttonChanged.connect((id, btn) ->
     activeTab = $(".tab-pane.active")

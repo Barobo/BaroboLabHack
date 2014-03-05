@@ -1,4 +1,4 @@
-robots = ['8KV7', '6C19']
+robots = [redRobot, blueRobot]
 
 angular.module('explore', [])
     .filter('plusMinus', ->
@@ -199,12 +199,6 @@ $(->
     Robot.setColorRGB(robots[0], 255, 0, 0)
     Robot.setColorRGB(robots[1], 0, 0, 255)
 )
-
-window.onbeforeunload = ->
-    Robot.setColorRGB(robots[0], 0, 255, 0)
-    Robot.setColorRGB(robots[1], 0, 255, 0)
-    Robot.disconnectRobot(x) for x in robots
-    null
 
 Robot.buttonChanged.connect((id, btn) ->
     activeTab = $(".tab-pane.active")
