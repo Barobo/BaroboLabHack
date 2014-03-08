@@ -114,6 +114,10 @@ textarea {
   left: -8% !important;
 }
 
+.exploreDirectionsP {
+    font-size: 2em;
+}
+
 .exploreDirectionsImg {
     display: block;
     margin-left: auto;

@@ -343,7 +343,8 @@ breakdownLine hs =
 exploreDirections = boilerplate'
     (labNav "Explore")
     (section !. "container-fluid" $ do
-        p $ str $ "In the next steps, use the robots to control and modify"
+        p !. "exploreDirectionsP" $
+            str $ "In the next steps, use the robots to control and modify"
                   ++ " the equations."
         img !. "exploreDirectionsImg" ! src "img/robot_controller.png"
         a ! href "explore.html"
