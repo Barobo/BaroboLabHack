@@ -46,8 +46,8 @@ else {
 var
   /* Constants */
   wheelRadius = 1.75,
-  blue = "4PMN",
-  red = "X769",
+  blue = blueRobot,
+  red = redRobot,
   imgH = 30, imgW = 40,
   ymin = -2, ymax = 12,
 
@@ -128,8 +128,8 @@ var
 
   nighttime = function () {
     stopRobots();
-    Robot.disconnectRobot(red);
-    Robot.disconnectRobot(blue);
+    //Robot.disconnectRobot(red);
+    //Robot.disconnectRobot(blue);
   },
 
   plotCharts = function (xvsts, poss) {

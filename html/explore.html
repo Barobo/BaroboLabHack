@@ -1,0 +1,231 @@
+<!DOCTYPE HTML>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            BaroboLab - DEMO
+        </title>
+        <script src="js/robot_ids.js">
+        </script>
+        <script src="js/vendor/jquery-1.10.2.min.js">
+        </script>
+        <script src="js/vendor/bootstrap.min.js">
+        </script>
+        <script src="js/vendor/angular.min.js">
+        </script>
+        <script src="js/vendor/jqmath-etc-0.4.0.min.js">
+        </script>
+        <script src="js/flot/jquery.flot.js">
+        </script>
+        <script src="js/explore.js">
+        </script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/jqmath-0.4.0.css">
+        <link rel="stylesheet" href="css/explore.css">
+    </head>
+    <body>
+        <nav class="app">
+            <a href="index.html">
+                <img src="img/barobo_logo.png">
+            </a>
+            <ol class="nav nav-stacked nav-pills">
+                <li>
+                    <a href="holt.html">
+                        <img src="img/holt_california.png">
+                    </a>
+                </li>
+                <li>
+                    <a href="chap6.html">
+                        Chapter 6
+                    </a>
+                </li>
+                <hr class="hdr">
+                <li>
+                    <a href="setup.html">
+                        <div>
+                            6.1:
+                            <small>
+                                Cops vs. Robbers
+                            </small>
+                        </div>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="#">
+                        Explore
+                    </a>
+                </li>
+                <hr class="ftr">
+                <li>
+                    <a href="lab_overview.html">
+                        <small class="text-muted">
+                            Overview
+                        </small>
+                    </a>
+                </li>
+            </ol>
+        </nav>
+        <section ng-app="explore" ng-controller="Explore">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#standardForm" data-toggle="tab">
+                        Standard Form
+                    </a>
+                </li>
+                <li>
+                    <a href="#slopeInterceptForm" data-toggle="tab">
+                        Slope Intercept Form
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="standardForm" class="tab-pane active" ng-controller="StandardEqns">
+                    <div>
+                        Input a system of your choice.
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="eqn-control col-xs-6" id="leftEqn">
+                                    <div ng-hide="!mockRobot">
+                                        <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="x1">
+                                        x + 
+                                        <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="y1">
+                                        y = 
+                                        <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="z1">
+                                    </div>
+                                    <div class="leftEqn">
+                                        <span ng-class="{activeControl: selected[0] == 0}">
+                                            {{x1| number | plusMinus:true}}x
+                                        </span>
+                                        <span ng-class="{activeControl: selected[0] == 1}">
+                                            {{y1| number | plusMinus}}y
+                                        </span>
+                                        =
+                                        <span ng-class="{activeControl: selected[0] == 2}">
+                                            {{z1| number | plusMinus:true}}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        {{y1| number | plusMinus:true}}y = {{-x1| number | plusMinus:true}}x {{z1| number | plusMinus}}
+                                    </div>
+                                    <div>
+                                        y = {{-x1/y1| number | plusMinus:true}}x {{z1/y1| number | plusMinus}}
+                                    </div>
+                                    <div>
+                                        Slope = {{-x1/y1| number | plusMinus:true}}
+                                    </div>
+                                    <div>
+                                        y-intercept = {{z1/y1| number | plusMinus:true}}
+                                    </div>
+                                </div>
+                                <div class="eqn-control col-xs-6" id="rightEqn">
+                                    <div ng-hide="!mockRobot">
+                                        <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="x2">
+                                        x + 
+                                        <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="y2">
+                                        y = 
+                                        <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="z2">
+                                    </div>
+                                    <div class="rightEqn">
+                                        <span ng-class="{activeControl: selected[1] == 0}">
+                                            {{x2| number | plusMinus:true}}x
+                                        </span>
+                                        <span ng-class="{activeControl: selected[1] == 1}">
+                                            {{y2| number | plusMinus}}y
+                                        </span>
+                                        =
+                                        <span ng-class="{activeControl: selected[1] == 2}">
+                                            {{z2| number | plusMinus:true}}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        {{y2| number | plusMinus:true}}y = {{-x2| number | plusMinus:true}}x {{z2| number | plusMinus}}
+                                    </div>
+                                    <div>
+                                        y = {{-x2/y2| number | plusMinus:true}}x {{z2/y2| number | plusMinus}}
+                                    </div>
+                                    <div>
+                                        Slope = {{-x2/y2| number | plusMinus:true}}
+                                    </div>
+                                    <div>
+                                        y-intercept = {{z2/y2| number | plusMinus:true}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="chartDisplay" ng-controller="Graph">
+                        <div class="chartGoesHere">
+                        </div>
+                    </div>
+                </div>
+                <div id="slopeInterceptForm" class="tab-pane" ng-controller="InterceptEqns">
+                    <div>
+                        Input a system of your choice.
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="eqn-control col-xs-6" id="leftEqn">
+                                    <div ng-hide="!mockRobot">
+                                        y = 
+                                        <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="a1">
+                                        x + 
+                                        <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="b1">
+                                    </div>
+                                    <div class="leftEqn">
+                                        y = 
+                                        <span ng-class="{activeControl: selected[0] == 0}">
+                                            {{a1| number | plusMinus:true}}x
+                                        </span>
+                                        <span ng-class="{activeControl: selected[0] == 1}">
+                                            {{b1| number | plusMinus}}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        Slope = {{a1| number | plusMinus:true}}
+                                    </div>
+                                    <div>
+                                        y-intercept = {{b1| number | plusMinus:true}}
+                                    </div>
+                                </div>
+                                <div class="eqn-control col-xs-6" id="rightEqn">
+                                    <div ng-hide="!mockRobot">
+                                        y = 
+                                        <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="a2">
+                                        x + 
+                                        <input type="number" maxlength="3" size="3" max="99" min="-99" ng-model="b2">
+                                    </div>
+                                    <div class="rightEqn">
+                                        y = 
+                                        <span ng-class="{activeControl: selected[1] == 0}">
+                                            {{a2| number | plusMinus:true}}x
+                                        </span>
+                                        <span ng-class="{activeControl: selected[1] == 1}">
+                                            {{b2| number | plusMinus}}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        Slope = {{a2| number | plusMinus:true}}
+                                    </div>
+                                    <div>
+                                        y-intercept = {{b2| number | plusMinus:true}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="chartDisplay" ng-controller="Graph">
+                        <div class="chartGoesHere">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="challenge.html" class="next pull-right btn btn-large btn-primary">
+                Next
+            </a>
+            <a href="calculate_chart.html" class="back btn btn-large btn-default">
+                Back
+            </a>
+        </section>
+    </body>
+</html>

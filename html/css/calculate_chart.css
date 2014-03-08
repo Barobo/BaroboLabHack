@@ -1,0 +1,33 @@
+.calc-chart-container {
+    position: relative;
+}
+
+#calculation_chart {
+    height: 340px;
+    width: 340px;
+}
+
+#xlabel, #ylabel, #intersect {
+    position: absolute;
+    color: #545454;
+    font-size: 80%;
+}
+
+#ylabel {
+    left: 235px;
+    bottom: 150px;
+}
+
+#xlabel {
+    left: 165px;
+    bottom: 250px;
+}
+
+#intersect {
+    left: 245px;
+    bottom: 235px;
+}
+
+.eqnTable {
+    text-align: right;
+}
