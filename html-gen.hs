@@ -291,7 +291,7 @@ calculateChart = boilerplate
                 H.span !# "xlabel" $ "6"
                 H.span !# "ylabel" $ "4"
                 H.span !# "intersect" $ "(4,6)"
-        a ! href "explore.html"
+        a ! href "explore_directions.html"
           !. "pull-right btn btn-large btn-primary" $ "Next"
         a ! href "calculate_setup.html"
           !. "btn btn-large btn-default" $ "Back"
@@ -340,6 +340,18 @@ breakdownLine hs =
         H.span !. "glyphicon glyphicon-arrow-right" $ mempty
         str $ concat hs
 
+exploreDirections = boilerplate'
+    (labNav "Explore")
+    (section !. "container-fluid" $ do
+        p $ str $ "In the next steps, use the robots to control and modify"
+                  ++ " the equations."
+        img !. "exploreDirectionsImg" ! src "img/robot_controller.png"
+        a ! href "explore.html"
+          !. "next pull-right btn btn-large btn-primary" $ "Next"
+        a ! href "calculate_chart.html"
+          !. "back btn btn-large btn-default" $ "Back"
+    )
+
 explore = boilerplate
     (labNav "Explore")
     (section ! ngApp "explore" ! ngController "Explore" $ do
@@ -365,7 +377,7 @@ explore = boilerplate
                     H.div !. "chartGoesHere" $ mempty
         a ! href "challenge.html"
           !. "next pull-right btn btn-large btn-primary" $ "Next"
-        a ! href "calculate_chart.html"
+        a ! href "explore_directions.html"
           !. "back btn btn-large btn-default" $ "Back"
     )
     [ "js/vendor/angular.min.js"
@@ -527,6 +539,7 @@ main = mapM_ genHtml [
     , ("html/prediction.html", prediction)
     , ("html/calculate_setup.html", calculateSetup)
     , ("html/calculate_chart.html", calculateChart)
+    , ("html/explore_directions.html", exploreDirections)
     , ("html/explore.html", explore)
     , ("html/challenge.html", challenge)
     ]

@@ -114,6 +114,13 @@ textarea {
   left: -8% !important;
 }
 
+.exploreDirectionsImg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+}
+
 .overviewPics img {
   height: 225px;
   width: 400px;

@@ -1,2 +1,2 @@
-var redRobot = "3TCZ";
-var blueRobot = "PJHF";
+var redRobot = "JS1P";
+var blueRobot = "9418";
